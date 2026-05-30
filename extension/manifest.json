@@ -1,0 +1,10 @@
+{
+  "name": "Realtor Assist",
+  "description": "Base Level Extension",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "realtorAssist.html",
+    "default_icon": "realtorAssist_extensions.png"
+  }
+}
