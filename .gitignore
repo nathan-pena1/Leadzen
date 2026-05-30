@@ -1,0 +1,24 @@
+# OS
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+# Java/Maven (Backend) 
+**/target/
+**.class
+# generated during runtime
+*.log
+**/logs/
+# IDE
+.vscode/
+*.code-workspace
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+# general safety
+.env
+.env.local
+*.properties.local
