@@ -1,0 +1,70 @@
+  .realtor-assist-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 64px;
+    padding: 10px 14px;
+    background: #ffffff;
+    border: 2px solid #1975f7;
+    border-radius: 999px;
+    color: #1975f7;
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    z-index: 999999;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.17);
+    font-weight: 600;
+  }
+
+  .realtor-assist-sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 340px;
+    height: 100vh;
+    z-index: 999999;
+    background: #ffffff;
+    box-shadow: -3px 0 18px rgba(0, 0, 0, 0.17);
+  }
+
+    .realtor-assist-sidebar .container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+    .realtor-assist-sidebar .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e7e7e7;
+  }
+
+    .realtor-assist-sidebar .company-name {
+    font-size: 16px;
+    color: #1975f6;
+  }
+
+   .realtor-assist-sidebar .close-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #000000;
+    padding: 4px;
+    cursor: pointer;
+  }
+
+  .realtor-assist-sidebar .content {
+    padding: 20px;
+    flex: 1;
+  }
+
+  .realtor-assist-sidebar .box {
+    background: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    padding: 16px;
+  }
