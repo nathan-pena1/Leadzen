@@ -46,6 +46,13 @@
     padding: 8px 16px 0px;
     width: 100%;
   }
+
+  .realtor-assist-sidebar #logo {
+    width: 30px;
+    height: 30px;
+    margin-left: 3px;
+    padding-bottom: 5px;
+  }
   .realtor-assist-sidebar .header-tab {
     display: flex;
   }
@@ -134,7 +141,7 @@
     background-color: rgba(0, 172, 23, 0.374);
   }
 
-  .realtor-assist-sidebar .blank-pfp{
+  .realtor-assist-sidebar .blank-pfp {
     border-radius: 6px;
     width: 40px;
     height: 40px;

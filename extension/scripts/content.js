@@ -27,12 +27,11 @@ sidebarContainer.appendChild(header);
 
 const hContainer = document.createElement("div");
 hContainer.classList.add("hContainer");
+hContainer.innerHTML = `
+  <h2 class="company-name">Realtor Assist</h2>
+  <img src="${chrome.runtime.getURL("images/realtorAssist-icon-32.png")}" id="logo" alt="realtor assist logo">
+`;
 header.appendChild(hContainer);
-
-const title = document.createElement("h2");
-title.classList.add("company-name")
-title.textContent = "Realtor Assist";
-hContainer.appendChild(title);
 
 const closeButton = document.createElement("button");
 closeButton.classList.add("close-btn");
