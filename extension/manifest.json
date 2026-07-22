@@ -21,6 +21,12 @@
       "run_at": "document_idle"
     }
   ],
+  "web_accessible_resources": [
+    {
+      "resources": ["images/*"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "icons": {
     "16": "images/realtorAssist-icon-16.png",
     "32": "images/realtorAssist-icon-32.png",

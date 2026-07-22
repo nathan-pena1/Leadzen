@@ -1,7 +1,7 @@
 // gmail only for now
 const emailDomains = ["mail.google.com", "www.gmail.com"];
 const isEmail = emailDomains.includes(window.location.hostname);
-
+let overview = true;
 let bar = null;
 if (isEmail) {
   bar = document.createElement("div");
@@ -12,7 +12,6 @@ if (isEmail) {
 if (isEmail) {
   document.body.appendChild(bar);
 }
-
 const sidebar = document.createElement("div");
 sidebar.classList.add("realtor-assist-sidebar");
 
@@ -26,16 +25,55 @@ const header = document.createElement("header");
 header.classList.add("header");
 sidebarContainer.appendChild(header);
 
+const hContainer = document.createElement("div");
+hContainer.classList.add("hContainer");
+header.appendChild(hContainer);
+
 const title = document.createElement("h2");
 title.classList.add("company-name")
 title.textContent = "Realtor Assist";
-header.appendChild(title);
+hContainer.appendChild(title);
 
 const closeButton = document.createElement("button");
 closeButton.classList.add("close-btn");
-closeButton.textContent = "X";
-header.appendChild(closeButton);
+closeButton.textContent = "⛌";
+hContainer.appendChild(closeButton);
 
+const tab = document.createElement("div");
+tab.classList.add("header-tab");
+tab.innerHTML = `
+    <div class="tab overview">Overview</div>
+    <div class="tab history">History</div>
+`;
+header.appendChild(tab);
+if (overview){
+  const overview = document.querySelector(".overview");
+  overview.id = "selected";
+  const leadContainer = document.createElement("div");
+  leadContainer.classList.add("lead-container");
+  leadContainer.innerHTML = `
+    <div class="lead-overview-container">
+      <div class="lead-title">Lead Status</div>
+      <div class="lead-status">NEW LEAD</div>
+    </div>
+
+    <div class="lead-info-card">
+
+      <img class="blank-pfp" src="${chrome.runtime.getURL("images/blank-pfp.png")}" alt="blank profile picture">
+      
+
+      <div class="lead-info-container">
+        <div class="lead-name">John Doe</div>
+        <div class="lead-email">john.doe@gmail.com</div>
+      </div>
+
+    </div>
+  `;
+  sidebarContainer.appendChild(leadContainer);
+
+
+
+}
 const content = document.createElement("div");
 content.classList.add("content");
 sidebarContainer.appendChild(content);
@@ -51,6 +89,7 @@ box.appendChild(boxTitle);
 const boxText = document.createElement("p");
 boxText.textContent = "Nothing to report.";
 box.appendChild(boxText);
+
 
 let isOpen = false;
 
