@@ -2,6 +2,7 @@
 const emailDomains = ["mail.google.com", "www.gmail.com"];
 const isEmail = emailDomains.includes(window.location.hostname);
 let overview = true;
+let generate = false;
 let bar = null;
 if (isEmail) {
   bar = document.createElement("div");
@@ -91,6 +92,48 @@ if (overview){
   `;
   sidebarContainer.appendChild(emailContainer);
 
+  const insightTitle = document.createElement("div");
+  insightTitle.classList.add("insight-title-container");
+  insightTitle.innerHTML = `
+    <img src="${chrome.runtime.getURL("images/realtorAssist-icon-32.png")}" id="insight-icon" alt="realtor assist logo">
+    <div class="insight-title" style="color: #1975f7">Realtor Assist Insights</div>
+  `;
+  sidebarContainer.appendChild(insightTitle);
+// Future implementation of AI insights will require a button click for cost saving purposes.
+// if (generate){ 
+// ai summary -> urgency report -> suggested reply
+
+  const insightContainer = document.createElement("div");
+  insightContainer.classList.add("insight-container");
+  insightContainer.innerHTML = `
+    <div class="ai-summary">John Doe is inquiring about your listing at 124 Conch Street. He
+      is asking about current interest, and availability for a showing.</div>
+
+      `;
+  //     <div class="lead-title">Lead Status</div>
+  //     <div class="lead-status" id="new-lead">NEW LEAD</div>
+  //   </div>
+
+  //   <div class="lead-info-card">
+
+  //     <img class="blank-pfp" src="${chrome.runtime.getURL("images/blank-pfp.png")}" alt="blank profile picture">
+      
+
+  //     <div class="lead-info-container">
+  //       <div class="lead-name">John Doe</div>
+  //       <div class="lead-email">john.doe@gmail.com</div>
+  //     </div>
+
+  //   </div>
+  // `;
+  sidebarContainer.appendChild(insightContainer);
+
+
+
+
+
+
+// }
 }
 const content = document.createElement("div");
 content.classList.add("content");
