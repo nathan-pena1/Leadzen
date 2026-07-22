@@ -33,6 +33,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow-y: auto;
   }
 
   .realtor-assist-sidebar .header {
@@ -99,7 +100,8 @@
     padding: 16px;
   }
 
-  .realtor-assist-sidebar .lead-container {
+  .realtor-assist-sidebar .lead-container,
+  .realtor-assist-sidebar .insight-title-container {
     padding: 12px;
   }
   
@@ -120,7 +122,8 @@
   }
 
   .realtor-assist-sidebar .lead-title,
-   .realtor-assist-sidebar .email-details
+   .realtor-assist-sidebar .email-details,
+   .realtor-assist-sidebar .insight-title
   {
     font-size: 16px;
     font-weight: bold;
@@ -164,8 +167,9 @@
     word-break: break-all;
    }
 
-  .realtor-assist-sidebar .email-container {
-    padding: 12px;
+  .realtor-assist-sidebar .email-container,
+  .realtor-assist-sidebar .insight-container {
+    padding: 2px 12px 0px 12px;
   }
 
   .realtor-assist-sidebar .email-info-card {
@@ -195,4 +199,23 @@
   flex: 1;
   min-width: 0;
   overflow-wrap: break-word;
+  }
+
+  .realtor-assist-sidebar .insight-title-container {
+    display: flex;
+    align-items: center;
+  }
+
+   .realtor-assist-sidebar #insight-icon {
+    width: 22px;
+    height: 22px;
+    padding-bottom: 4px;
+  }
+
+  .realtor-assist-sidebar .ai-summary {
+    border: 1px solid #1975f7;
+    border-radius: 6px;
+    padding: 15px;
+    font-size: 15px;
+    overflow-wrap: break-word;
   }
