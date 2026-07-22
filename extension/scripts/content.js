@@ -64,7 +64,7 @@ if (overview){
 
       <div class="lead-info-container">
         <div class="lead-name">John Doe</div>
-        <div class="lead-email">john.doe@gmail.com</div>
+        <div class="lead-email">john.doe.realty12@gmail.com</div>
       </div>
 
     </div>
@@ -85,7 +85,7 @@ if (overview){
 
       <div class="received-container">
         <div class="received-title">Received:</div>
-        <div class="received-text">Today, 9:52 AM</div>
+        <div class="received-text">Today, 4:43 PM</div>
       </div>
 
     </div>
