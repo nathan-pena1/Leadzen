@@ -54,7 +54,7 @@ if (overview){
   leadContainer.innerHTML = `
     <div class="lead-overview-container">
       <div class="lead-title">Lead Status</div>
-      <div class="lead-status">NEW LEAD</div>
+      <div class="lead-status" id="new-lead">NEW LEAD</div>
     </div>
 
     <div class="lead-info-card">
@@ -71,7 +71,26 @@ if (overview){
   `;
   sidebarContainer.appendChild(leadContainer);
 
+  const emailContainer = document.createElement("div");
+  emailContainer.classList.add("email-container");
+  emailContainer.innerHTML = `
+    <div class="email-details">Email Details</div>
 
+    <div class="email-info-card">
+
+      <div class="subject-container">
+        <div class="subject-title">Subject:</div>
+        <div class="subject-text">Interest in 124 Conch Street</div>
+      </div>
+
+      <div class="received-container">
+        <div class="received-title">Received:</div>
+        <div class="received-text">Today, 9:52 AM</div>
+      </div>
+
+    </div>
+  `;
+  sidebarContainer.appendChild(emailContainer);
 
 }
 const content = document.createElement("div");

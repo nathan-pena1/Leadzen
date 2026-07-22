@@ -29,13 +29,13 @@
     box-shadow: -3px 0 18px rgba(0, 0, 0, 0.17);
   }
 
-    .realtor-assist-sidebar .container {
+  .realtor-assist-sidebar .container {
     display: flex;
     flex-direction: column;
     height: 100%;
   }
 
-    .realtor-assist-sidebar .header {
+  .realtor-assist-sidebar .header {
     border-bottom: 1px solid #e7e7e7;
   }
 
@@ -52,18 +52,24 @@
   .realtor-assist-sidebar .tab {
     padding: 10px 20px 20px 20px;
   }
+
+  .realtor-assist-sidebar .overview,
+  .realtor-assist-sidebar .history{
+    color: rgb(92, 92, 92);
+  }
+
   #selected {
     color: #1975f7;
     border-bottom: 2px solid #1975f7;
   }
 
-    .realtor-assist-sidebar .company-name {
+  .realtor-assist-sidebar .company-name {
     font-size: 22px;
     color: #1975f6;
     margin-left: 4px;
   }
 
-   .realtor-assist-sidebar .close-btn {
+  .realtor-assist-sidebar .close-btn {
     background: none;
     border: none;
     font-size: 18px;
@@ -106,7 +112,9 @@
     margin-top: 10px;
   }
 
-  .realtor-assist-sidebar .lead-title{
+  .realtor-assist-sidebar .lead-title,
+   .realtor-assist-sidebar .email-details
+  {
     font-size: 16px;
     font-weight: bold;
   }
@@ -119,6 +127,9 @@
     margin-left: auto;
     font-weight: 520;
     font-size: 15px;
+  }
+
+  .realtor-assist-sidebar #new-lead {
     color: rgb(1, 162, 1);
     background-color: rgba(0, 172, 23, 0.374);
   }
@@ -132,14 +143,49 @@
 
   .realtor-assist-sidebar .lead-info-container {
     margin-right: auto;
+    min-width: 0;
   }
-   .realtor-assist-sidebar .lead-name {
-      font-size: 18px;
-      font-weight: bold;
+  .realtor-assist-sidebar .lead-name {
+    font-size: 18px;
+    font-weight: bold;
+    overflow-wrap: break-word;
    }
 
-   .realtor-assist-sidebar .lead-email {
-
-
+  .realtor-assist-sidebar .lead-email {
+    color: rgb(92, 92, 92);
+    overflow-wrap: break-word;
+    word-break: break-all;
    }
 
+  .realtor-assist-sidebar .email-container {
+    padding: 12px;
+  }
+
+  .realtor-assist-sidebar .email-info-card {
+    border: 1px solid #1975f7;
+    border-radius: 6px;
+    padding: 15px;
+    margin-top: 10px;
+  }
+
+  .realtor-assist-sidebar .subject-container,
+  .realtor-assist-sidebar .received-container {
+    display: flex;
+    gap: 12px;
+    font-size: 15px;
+  }
+  .realtor-assist-sidebar .subject-container {
+    margin-bottom: 7px;
+  }
+  .realtor-assist-sidebar .subject-title,
+  .realtor-assist-sidebar .received-title {
+  flex-shrink: 0;
+  color: rgb(92, 92, 92);
+  }
+
+  .realtor-assist-sidebar .subject-text,
+  .realtor-assist-sidebar .received-text {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: break-word;
+  }
