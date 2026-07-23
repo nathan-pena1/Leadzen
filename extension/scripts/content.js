@@ -96,12 +96,11 @@ if (overview){
   insightTitle.classList.add("insight-title-container");
   insightTitle.innerHTML = `
     <img src="${chrome.runtime.getURL("images/realtorAssist-icon-32.png")}" id="insight-icon" alt="realtor assist logo">
-    <div class="insight-title" style="color: #1975f7">Realtor Assist Insights</div>
+    <div class="insight-title">Realtor Assist Insights</div>
   `;
   sidebarContainer.appendChild(insightTitle);
 // Future implementation of AI insights will require a button click for cost saving purposes.
 // if (generate){ 
-// ai summary -> urgency report -> suggested reply
 
   const insightContainer = document.createElement("div");
   insightContainer.classList.add("insight-container");
@@ -120,32 +119,35 @@ if (overview){
     
     </div>
 
+    <div class="suggested-reply-title">Suggested Reply</div>
+
+    <div class="reply-card">
+      <div class="reply-text">Hi John,
+
+Thanks for your interest in 124 Conch Street!
+      
+Yes, the property is still available. I'd be happy to schedule a showing with you. How does this Tuesday at 2 pm look for you?
+      
+Best,
+[Your Name]
+      </div>
+
+      <button class="reply-copy-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+        </svg>
+      </button>
+
+  </div>
+
 
       `;
-  //     <div class="lead-title">Lead Status</div>
-  //     <div class="lead-status" id="new-lead">NEW LEAD</div>
-  //   </div>
-
-  //   <div class="lead-info-card">
-
-  //     <img class="blank-pfp" src="${chrome.runtime.getURL("images/blank-pfp.png")}" alt="blank profile picture">
-      
-
-  //     <div class="lead-info-container">
-  //       <div class="lead-name">John Doe</div>
-  //       <div class="lead-email">john.doe@gmail.com</div>
-  //     </div>
-
-  //   </div>
-  // `;
   sidebarContainer.appendChild(insightContainer);
-
-
-
-
-
-
 // }
+
+
+
+
 }
 const content = document.createElement("div");
 content.classList.add("content");

@@ -122,12 +122,19 @@
   }
 
   .realtor-assist-sidebar .lead-title,
-   .realtor-assist-sidebar .email-details,
-   .realtor-assist-sidebar .insight-title,
-   .realtor-assist-sidebar .urgency-title
+  .realtor-assist-sidebar .email-details,
+  .realtor-assist-sidebar .insight-title,
+  .realtor-assist-sidebar .urgency-title,
+  .realtor-assist-sidebar .suggested-reply-title
   {
     font-size: 16px;
     font-weight: bold;
+  }
+
+  .realtor-assist-sidebar .insight-title,
+  .realtor-assist-sidebar .urgency-title,
+  .realtor-assist-sidebar .suggested-reply-title {
+    color: #1975f7;
   }
 
   .realtor-assist-sidebar .lead-status,
@@ -232,7 +239,7 @@
     display: flex;
     align-items: center;
     padding: 12px 8px 12px 12px;
-    gap: 8px
+    gap: 8px;
   }
 
   .realtor-assist-sidebar .urgency {
@@ -255,4 +262,26 @@
     font-size: 15px;
     flex: 1;
     min-width: 0;
+  }
+
+  .realtor-assist-sidebar .suggested-reply-title {
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+  .realtor-assist-sidebar .reply-card {
+  position: relative;
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 8px;
+  padding: 12px 12px 18px 12px;
+  height: auto;
+  background-color:  #1976f70c;
+  }
+  .realtor-assist-sidebar .reply-text {
+    white-space: pre-wrap; 
+    overflow-wrap: break-word;
+  }
+  .realtor-assist-sidebar .reply-copy-btn {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
   }
