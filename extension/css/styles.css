@@ -95,7 +95,7 @@
 
   .realtor-assist-sidebar .box {
     background: #ffffff;
-    border: 1px solid #000000;
+    border: 1px solid rgb(206, 206, 206);
     border-radius: 8px;
     padding: 16px;
   }
@@ -123,19 +123,21 @@
 
   .realtor-assist-sidebar .lead-title,
    .realtor-assist-sidebar .email-details,
-   .realtor-assist-sidebar .insight-title
+   .realtor-assist-sidebar .insight-title,
+   .realtor-assist-sidebar .urgency-title
   {
     font-size: 16px;
     font-weight: bold;
   }
 
-  .realtor-assist-sidebar .lead-status {
+  .realtor-assist-sidebar .lead-status,
+  .realtor-assist-sidebar .urgency-level-title {
     padding-right: 6px;
     padding-left: 6px;
     border-radius: 8px;
     margin-right: 4px;
     margin-left: auto;
-    font-weight: 520;
+    font-weight: 480;
     font-size: 15px;
   }
 
@@ -173,7 +175,7 @@
   }
 
   .realtor-assist-sidebar .email-info-card {
-    border: 1px solid #1975f7;
+    border: 1px solid rgb(206, 206, 206);
     border-radius: 6px;
     padding: 15px;
     margin-top: 10px;
@@ -212,10 +214,45 @@
     padding-bottom: 4px;
   }
 
-  .realtor-assist-sidebar .ai-summary {
-    border: 1px solid #1975f7;
+  .realtor-assist-sidebar .ai-summary,
+  .realtor-assist-sidebar .urgency-card {
+    border: 1px solid rgb(206, 206, 206);
     border-radius: 6px;
     padding: 15px;
     font-size: 15px;
     overflow-wrap: break-word;
+  }
+
+  .realtor-assist-sidebar .urgency-title-container{
+    display: flex;
+    align-items: center;
+    padding: 12px 0px;
+  }
+  .realtor-assist-sidebar .urgency-card {
+    display: flex;
+    align-items: center;
+    padding: 12px 8px 12px 12px;
+    gap: 8px
+  }
+
+  .realtor-assist-sidebar .urgency {
+    padding: 2px 6px;
+    border-radius: 8px;
+    font-weight: 480;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .realtor-assist-sidebar .urgency-level-title{
+    padding: 2px 6px;
+  }
+   .realtor-assist-sidebar #medium {
+    color: rgb(255, 157, 0);
+    background-color: rgba(255, 191, 0, 0.374);
+  }
+
+  .realtor-assist-sidebar .urgency-description {
+    font-size: 15px;
+    flex: 1;
+    min-width: 0;
   }

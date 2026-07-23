@@ -109,6 +109,18 @@ if (overview){
     <div class="ai-summary">John Doe is inquiring about your listing at 124 Conch Street. He
       is asking about current interest, and availability for a showing.</div>
 
+    <div class="urgency-title-container">
+      <div class="urgency-title">Urgency</div>
+      <div class="urgency-level-title" id="medium">Medium</div>
+    </div>
+
+    <div class="urgency-card">
+      <div class="urgency" id="medium">Medium</div>
+      <div class="urgency-description">Interested buyer asking about a showing.</div>
+    
+    </div>
+
+
       `;
   //     <div class="lead-title">Lead Status</div>
   //     <div class="lead-status" id="new-lead">NEW LEAD</div>
