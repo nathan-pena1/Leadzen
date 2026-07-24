@@ -149,22 +149,20 @@ Best,
 
 
 }
-const content = document.createElement("div");
-content.classList.add("content");
-sidebarContainer.appendChild(content);
+const documentation = document.createElement("div");
+documentation.classList.add("documentation");
+documentation.innerHTML = `
 
-const box = document.createElement("div");
-box.classList.add("box");
-content.appendChild(box);
+<div class ="mark-responded-container">
+✓&nbsp;&nbsp;Mark As Responded
+</div>
 
-const boxTitle = document.createElement("h3");
-boxTitle.textContent = "Review Suggestions";
-box.appendChild(boxTitle);
+<div class ="add-note-container">
+✎&nbsp;&nbsp;Add Note
+</div>
+`;
 
-const boxText = document.createElement("p");
-boxText.textContent = "Nothing to report.";
-box.appendChild(boxText);
-
+sidebarContainer.appendChild(documentation);
 
 let isOpen = false;
 

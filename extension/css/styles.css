@@ -285,3 +285,26 @@
     bottom: 8px;
     right: 8px;
   }
+
+  .realtor-assist-sidebar .documentation{
+    padding: 16px;
+  }
+
+  .realtor-assist-sidebar .mark-responded-container {
+    background-color: #1975f7;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+    padding: 12px 0px;
+    font-weight: 520;
+    margin-bottom: 10px;
+  }
+
+  .realtor-assist-sidebar .add-note-container {
+    border: 1px solid rgb(206, 206, 206);
+    border-radius: 8px;
+    color: #1975f7;
+    text-align: center;
+    padding: 12px 0px;
+    font-weight: 520;
+  }
