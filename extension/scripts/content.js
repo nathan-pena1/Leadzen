@@ -85,7 +85,7 @@ if (overview){
 
       <div class="received-container">
         <div class="received-title">Received:</div>
-        <div class="received-text">Today, 4:43 PM</div>
+        <div class="received-text">Today, 6:29 PM</div>
       </div>
 
     </div>
@@ -99,8 +99,25 @@ if (overview){
     <div class="insight-title">Realtor Assist Insights</div>
   `;
   sidebarContainer.appendChild(insightTitle);
-// Future implementation of AI insights will require a button click for cost saving purposes.
-// if (generate){ 
+
+const documentation = document.createElement("div");
+documentation.classList.add("documentation");
+documentation.innerHTML = `
+
+<button class ="mark-responded-container">
+✓&nbsp;&nbsp;Mark As Responded
+</button>
+
+<button class="add-note-container">
+
+<img class="note-icon" src="${chrome.runtime.getURL("images/notes.svg")}" alt="note icon">
+<div class="note-text">Add Note</div>
+
+</button>
+`;
+
+let generate = true;
+if (generate) { 
 
   const insightContainer = document.createElement("div");
   insightContainer.classList.add("insight-container");
@@ -141,28 +158,26 @@ Best,
   </div>
 
 
-      `;
-  sidebarContainer.appendChild(insightContainer);
-// }
+    `;
+    sidebarContainer.appendChild(insightContainer);
+    sidebarContainer.appendChild(documentation);
+  }
+  
+  else {
+    const generateContainer = document.createElement("div");
+    generateContainer.classList.add("generate-container")
+    generateContainer.innerHTML = `
+    <div class="generate-desc">Get help with this lead. Receive tailored insights, analysis, and strategy recommendations.</div>
 
+    <button class="generate-insights-btn">Generate Insights</div>
+    `;
+    sidebarContainer.appendChild(generateContainer);
 
-
+    documentation.classList.add("bottom")
+    sidebarContainer.appendChild(documentation);
+  }
 
 }
-const documentation = document.createElement("div");
-documentation.classList.add("documentation");
-documentation.innerHTML = `
-
-<div class ="mark-responded-container">
-✓&nbsp;&nbsp;Mark As Responded
-</div>
-
-<div class ="add-note-container">
-✎&nbsp;&nbsp;Add Note
-</div>
-`;
-
-sidebarContainer.appendChild(documentation);
 
 let isOpen = false;
 

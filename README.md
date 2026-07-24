@@ -40,3 +40,4 @@ I am currently building out the UI layer, from there I will build out the backen
 #### See below for what I have so far. 
 ![Progress Image (bar)](extension/images/progress-image1.jpeg)
 ![Progress Image (sidebar)](extension/images/progress-image2.jpeg)
+![Progress Image (sidebar)](extension/images/progress-image3.jpeg)
