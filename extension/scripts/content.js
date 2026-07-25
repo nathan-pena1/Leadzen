@@ -1,3 +1,19 @@
+function getName(){
+  const senderName = document.querySelector("span.gD");
+  let name = "Unable to pull name";
+  
+  if (senderName) {
+    const nameId = senderName.getAttribute("name");
+
+    if (nameId) { 
+    name = nameId.trim();
+    }
+
+  }
+
+  return name;
+}
+
 function getSubject(){
   const emailSubject = document.querySelector("h2.hP");
   let subject = "Unable to pull subject";
@@ -100,7 +116,7 @@ leadContainer.innerHTML = `
       
 
     <div class="lead-info-container">
-      <div class="lead-name">John Doe</div>
+      <div class="lead-name"></div>
       <div class="lead-email">john.doe.realty12@gmail.com</div>
     </div>
 
@@ -241,6 +257,8 @@ function openSidebar() {
   if (isOpen) {
     return;
   }
+  const leadName = document.querySelector(".lead-name");
+  leadName.textContent = getName();
 
   const subjectText = document.querySelector(".subject-text");
   subjectText.textContent = getSubject();
