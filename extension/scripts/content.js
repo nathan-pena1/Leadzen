@@ -1,8 +1,9 @@
 // gmail only for now
 const emailDomains = ["mail.google.com", "www.gmail.com"];
 const isEmail = emailDomains.includes(window.location.hostname);
-let overview = true;
-let generate = false;
+let overview = false;
+let history = true;
+let generate = true;
 let bar = null;
 if (isEmail) {
   bar = document.createElement("div");
@@ -119,7 +120,6 @@ documentation.innerHTML = `
 </button>
 `;
 
-let generate = true;
 if (generate) { 
 
   const insightContainer = document.createElement("div");
@@ -179,6 +179,38 @@ Best,
     documentation.classList.add("bottom")
     sidebarContainer.appendChild(documentation);
   }
+
+}
+else if (history) {
+  const history = document.querySelector(".history");
+  history.id = "selected";
+
+  const optionContainer = document.createElement("div");
+  optionContainer.classList.add("option-container");
+  optionContainer.innerHTML = `
+    <div class="option-btn-container">
+
+      <button class="option-btn all" id="selected">All</button>
+
+      <button class="option-btn leads">Leads</button>
+
+      <button class="option-btn replied">Replied</button>
+
+      <button class="option-btn archived">Archived</button>
+
+
+    </div>
+
+    <button class="option-trash">
+      <img class="trash-icon" alt="trash icon" src="${chrome.runtime.getURL("images/trash-icon.svg")}">
+    </button>
+  `;
+  sidebarContainer.appendChild(optionContainer);
+
+
+
+
+
 
 }
 
