@@ -1,3 +1,21 @@
+function getSubject(){
+  const emailSubject = document.querySelector("h2.hP");
+  let subject = "Unable to pull subject";
+  if (emailSubject) { 
+    subject = emailSubject.textContent.trim();
+  }
+  return subject;
+}
+
+function getReceived(){
+  const emailReceived = document.querySelector(".g3");
+  let received = "Unable to pull date & time";
+  if (emailReceived) { 
+    received = emailReceived.title.trim();
+  }
+  return received;
+}
+
 // gmail only for now
 const emailDomains = ["mail.google.com", "www.gmail.com"];
 const isEmail = emailDomains.includes(window.location.hostname);
@@ -101,12 +119,12 @@ emailContainer.innerHTML = `
 
     <div class="subject-container">
       <div class="subject-title">Subject:</div>
-      <div class="subject-text">Interest in 124 Conch Street</div>
+      <div class="subject-text"></div>
     </div>
 
     <div class="received-container">
       <div class="received-title">Received:</div>
-      <div class="received-text">Today, 6:29 PM</div>
+      <div class="received-text"></div>
     </div>
 
     </div>
@@ -223,6 +241,12 @@ function openSidebar() {
   if (isOpen) {
     return;
   }
+
+  const subjectText = document.querySelector(".subject-text");
+  subjectText.textContent = getSubject();
+
+  const receivedText = document.querySelector(".received-text");
+  receivedText.textContent = getReceived();
 
   isOpen = true;
   sidebar.style.display = "block";
