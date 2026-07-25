@@ -1,11 +1,11 @@
 {
-  "name": "Realtor Assist",
+  "name": "Leadzen",
   "description": "Develop better client relationships, track and qualify leads, scale your business, and close more deals.",
   "version": "1.0",
   "manifest_version": 3,
   "action": {
-    "default_title": "Open Realtor Assist",
-    "default_icon": "images/realtorAssist-icon-128.png"
+    "default_title": "Open Leadzen",
+    "default_icon": "images/leadzen-icon-128.png"
   },
   "background": {
     "service_worker": "scripts/background.js"
@@ -28,9 +28,9 @@
     }
   ],
   "icons": {
-    "16": "images/realtorAssist-icon-16.png",
-    "32": "images/realtorAssist-icon-32.png",
-    "48": "images/realtorAssist-icon-48.png",
-    "128": "images/realtorAssist-icon-128.png"
+    "16": "images/leadzen-icon-16.png",
+    "32": "images/leadzen-icon-32.png",
+    "48": "images/leadzen-icon-48.png",
+    "128": "images/leadzen-icon-128.png"
   }
 }

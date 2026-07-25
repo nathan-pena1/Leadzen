@@ -1,4 +1,4 @@
-package com.realtorassist.backend;
+package com.leadzen.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
