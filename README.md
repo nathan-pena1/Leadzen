@@ -1,8 +1,8 @@
-# Realtor Assist
+# Leadzen
 Develop better client relationships, track and qualify leads, scale your business, and close more deals.  
   
 ### Ok... but like really, what is it?
-Realtor Assist is a chrome extension i'm building that will help real estate professionals manage, convert, and track leads.  
+Leadzen is a chrome extension i'm building that will help real estate professionals manage, convert, and track leads.  
 
 #### Planned Features:  
 - AI email analysis
@@ -16,7 +16,7 @@ Realtor Assist is a chrome extension i'm building that will help real estate pro
 
 
 
-Realtor Assist is a side project i'm building as I head into junior year of college. I wanted to create an application that allows me to learn and further develop my skills and I also thought i'd make something that would help others and/or myself (win win), so I looked at my workflow as a real estate agent and questioned what would make my life easier. I also wanted to explore the applications of AI in professional workflows.
+Leadzen is a side project i'm building as I head into junior year of college. I wanted to create an application that allows me to learn and further develop my skills and I also thought i'd make something that would help others and/or myself (win win), so I looked at my workflow as a real estate agent and questioned what would make my life easier. I also wanted to explore the applications of AI in professional workflows.
 
 ### What is/will it be built with?
 Frontend: 

@@ -6,15 +6,18 @@ let generate = false;
 let bar = null;
 if (isEmail) {
   bar = document.createElement("div");
-  bar.classList.add("realtor-assist-bar");
-  bar.textContent = "Realtor Assist";
+  bar.classList.add("leadzen-bar");
+  bar.innerHTML = `
+  Leadzen<img src="${chrome.runtime.getURL("images/leadzen-icon-128.png")}" id="bar-logo" alt="leadzen logo">
+  
+  `;
 }
 
 if (isEmail) {
   document.body.appendChild(bar);
 }
 const sidebar = document.createElement("div");
-sidebar.classList.add("realtor-assist-sidebar");
+sidebar.classList.add("leadzen-sidebar");
 
 document.body.appendChild(sidebar);
 
@@ -29,8 +32,8 @@ sidebarContainer.appendChild(header);
 const hContainer = document.createElement("div");
 hContainer.classList.add("hContainer");
 hContainer.innerHTML = `
-  <h2 class="company-name">Realtor Assist</h2>
-  <img src="${chrome.runtime.getURL("images/realtorAssist-icon-32.png")}" id="logo" alt="realtor assist logo">
+  <h2 class="company-name">Leadzen</h2>
+  <img src="${chrome.runtime.getURL("images/leadzen-icon-32.png")}" id="logo" alt="leadzen logo">
 `;
 header.appendChild(hContainer);
 
@@ -95,8 +98,8 @@ if (overview){
   const insightTitle = document.createElement("div");
   insightTitle.classList.add("insight-title-container");
   insightTitle.innerHTML = `
-    <img src="${chrome.runtime.getURL("images/realtorAssist-icon-32.png")}" id="insight-icon" alt="realtor assist logo">
-    <div class="insight-title">Realtor Assist Insights</div>
+    <img src="${chrome.runtime.getURL("images/leadzen-icon-32.png")}" id="insight-icon" alt="leadzen logo">
+    <div class="insight-title">Leadzen Insights</div>
   `;
   sidebarContainer.appendChild(insightTitle);
 
