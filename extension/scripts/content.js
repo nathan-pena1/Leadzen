@@ -1,9 +1,6 @@
 // gmail only for now
 const emailDomains = ["mail.google.com", "www.gmail.com"];
 const isEmail = emailDomains.includes(window.location.hostname);
-let overview = false;
-let history = true;
-let generate = true;
 let bar = null;
 if (isEmail) {
   bar = document.createElement("div");
@@ -46,173 +43,179 @@ hContainer.appendChild(closeButton);
 const tab = document.createElement("div");
 tab.classList.add("header-tab");
 tab.innerHTML = `
-    <div class="tab overview">Overview</div>
+    <div class="tab overview" id="selected">Overview</div>
     <div class="tab history">History</div>
 `;
 header.appendChild(tab);
-if (overview){
-  const overview = document.querySelector(".overview");
-  overview.id = "selected";
-  const leadContainer = document.createElement("div");
-  leadContainer.classList.add("lead-container");
-  leadContainer.innerHTML = `
-    <div class="lead-overview-container">
-      <div class="lead-title">Lead Status</div>
-      <div class="lead-status" id="new-lead">NEW LEAD</div>
-    </div>
 
-    <div class="lead-info-card">
+const overviewTab = document.querySelector(".tab.overview");
+const historyTab = document.querySelector(".tab.history");
 
-      <img class="blank-pfp" src="${chrome.runtime.getURL("images/blank-pfp.png")}" alt="blank profile picture">
+overviewTab.addEventListener("click", () => {
+  historyTab.id = '';
+  overviewTab.id = "selected";
+  historyContainer.classList.add("hidden");
+  overviewContainer.classList.remove("hidden");
+});
+
+historyTab.addEventListener("click", () => {
+  overviewTab.id = '';
+  historyTab.id = "selected";
+  overviewContainer.classList.add("hidden");
+  historyContainer.classList.remove("hidden");
+});
+
+const overviewContainer = document.createElement("div");
+overviewContainer.classList.add("overview-container");
+  
+const leadContainer = document.createElement("div");
+leadContainer.classList.add("lead-container");
+leadContainer.innerHTML = `
+  <div class="lead-overview-container">
+    <div class="lead-title">Lead Status</div>
+    <div class="lead-status" id="new-lead">NEW LEAD</div>
+  </div>
+
+  <div class="lead-info-card">
+
+    <img class="blank-pfp" src="${chrome.runtime.getURL("images/blank-pfp.png")}" alt="blank profile picture">
       
 
-      <div class="lead-info-container">
-        <div class="lead-name">John Doe</div>
-        <div class="lead-email">john.doe.realty12@gmail.com</div>
-      </div>
+    <div class="lead-info-container">
+      <div class="lead-name">John Doe</div>
+      <div class="lead-email">john.doe.realty12@gmail.com</div>
+    </div>
+
+  </div>
+  `;
+
+overviewContainer.appendChild(leadContainer);
+  
+
+const emailContainer = document.createElement("div");
+emailContainer.classList.add("email-container");
+emailContainer.innerHTML = `
+  <div class="email-details">Email Details</div>
+
+  <div class="email-info-card">
+
+    <div class="subject-container">
+      <div class="subject-title">Subject:</div>
+      <div class="subject-text">Interest in 124 Conch Street</div>
+    </div>
+
+    <div class="received-container">
+      <div class="received-title">Received:</div>
+      <div class="received-text">Today, 6:29 PM</div>
+    </div>
 
     </div>
   `;
-  sidebarContainer.appendChild(leadContainer);
+overviewContainer.appendChild(emailContainer);
 
-  const emailContainer = document.createElement("div");
-  emailContainer.classList.add("email-container");
-  emailContainer.innerHTML = `
-    <div class="email-details">Email Details</div>
-
-    <div class="email-info-card">
-
-      <div class="subject-container">
-        <div class="subject-title">Subject:</div>
-        <div class="subject-text">Interest in 124 Conch Street</div>
-      </div>
-
-      <div class="received-container">
-        <div class="received-title">Received:</div>
-        <div class="received-text">Today, 6:29 PM</div>
-      </div>
-
-    </div>
+const insightTitle = document.createElement("div");
+insightTitle.classList.add("insight-title-container");
+insightTitle.innerHTML = `
+  <img src="${chrome.runtime.getURL("images/leadzen-icon-32.png")}" id="insight-icon" alt="leadzen logo">
+  <div class="insight-title">Leadzen Insights</div>
   `;
-  sidebarContainer.appendChild(emailContainer);
-
-  const insightTitle = document.createElement("div");
-  insightTitle.classList.add("insight-title-container");
-  insightTitle.innerHTML = `
-    <img src="${chrome.runtime.getURL("images/leadzen-icon-32.png")}" id="insight-icon" alt="leadzen logo">
-    <div class="insight-title">Leadzen Insights</div>
-  `;
-  sidebarContainer.appendChild(insightTitle);
+overviewContainer.appendChild(insightTitle);
 
 const documentation = document.createElement("div");
-documentation.classList.add("documentation");
+documentation.classList.add("documentation", "bottom");
 documentation.innerHTML = `
+  <button class="mark-responded-container">
+    ✓&nbsp;&nbsp;Mark As Responded
+  </button>
 
-<button class ="mark-responded-container">
-✓&nbsp;&nbsp;Mark As Responded
-</button>
-
-<button class="add-note-container">
-
-<img class="note-icon" src="${chrome.runtime.getURL("images/notes.svg")}" alt="note icon">
-<div class="note-text">Add Note</div>
-
-</button>
+  <button class="add-note-container">
+    <img class="note-icon" src="${chrome.runtime.getURL("images/notes.svg")}" alt="note icon">
+    <div class="note-text">Add Note</div>
+  </button>
 `;
 
-if (generate) { 
+const generateContainer = document.createElement("div");
+generateContainer.classList.add("generate-container");
+generateContainer.innerHTML = `
+  <div class="generate-desc">Get help with this lead. Receive tailored insights, analysis, and strategy recommendations.</div>
+  <button class="generate-insights-btn">Generate Insights</button>
+`;
+overviewContainer.appendChild(generateContainer);
 
-  const insightContainer = document.createElement("div");
-  insightContainer.classList.add("insight-container");
-  insightContainer.innerHTML = `
-    <div class="ai-summary">John Doe is inquiring about your listing at 124 Conch Street. He
-      is asking about current interest, and availability for a showing.</div>
+const generatedContainer = document.createElement("div");
+generatedContainer.classList.add("hidden");
 
-    <div class="urgency-title-container">
-      <div class="urgency-title">Urgency</div>
-      <div class="urgency-level-title" id="medium">Medium</div>
-    </div>
+const insightContainer = document.createElement("div");
+insightContainer.classList.add("insight-container");
+insightContainer.innerHTML = `
+  <div class="ai-summary">John Doe is inquiring about your listing at 124 Conch Street. He
+    is asking about current interest, and availability for a showing.</div>
 
-    <div class="urgency-card">
-      <div class="urgency" id="medium">Medium</div>
-      <div class="urgency-description">Interested buyer asking about a showing.</div>
-    
-    </div>
+  <div class="urgency-title-container">
+    <div class="urgency-title">Urgency</div>
+    <div class="urgency-level-title" id="medium">Medium</div>
+  </div>
 
-    <div class="suggested-reply-title">Suggested Reply</div>
+  <div class="urgency-card">
+    <div class="urgency" id="medium">Medium</div>
+    <div class="urgency-description">Interested buyer asking about a showing.</div>
+  </div>
 
-    <div class="reply-card">
-      <div class="reply-text">Hi John,
+  <div class="suggested-reply-title">Suggested Reply</div>
+
+  <div class="reply-card">
+    <div class="reply-text">Hi John,
 
 Thanks for your interest in 124 Conch Street!
-      
+    
 Yes, the property is still available. I'd be happy to schedule a showing with you. How does this Tuesday at 2 pm look for you?
-      
+    
 Best,
 [Your Name]
-      </div>
+    </div>
 
-      <button class="reply-copy-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
-        </svg>
-      </button>
+    <button class="reply-copy-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+      </svg>
+    </button>
+  </div>
+`;
+generatedContainer.appendChild(insightContainer);
+overviewContainer.appendChild(generatedContainer);
+overviewContainer.appendChild(documentation);
+sidebarContainer.appendChild(overviewContainer);
+
+const genButton = generateContainer.querySelector(".generate-insights-btn");
+genButton.addEventListener("click", () => {
+  generateContainer.classList.add("hidden");
+  generatedContainer.classList.remove("hidden");
+});
+    
+const historyContainer = document.createElement("div");
+historyContainer.classList.add("hidden");
+
+const optionContainer = document.createElement("div");
+optionContainer.classList.add("option-container");
+optionContainer.innerHTML = `
+  <div class="option-btn-container">
+
+    <button class="option-btn all" id="selected">All</button>
+
+    <button class="option-btn leads">Leads</button>
+
+    <button class="option-btn replied">Replied</button>
+
+    <button class="option-btn archived">Archived</button>
 
   </div>
 
-
-    `;
-    sidebarContainer.appendChild(insightContainer);
-    sidebarContainer.appendChild(documentation);
-  }
-  
-  else {
-    const generateContainer = document.createElement("div");
-    generateContainer.classList.add("generate-container")
-    generateContainer.innerHTML = `
-    <div class="generate-desc">Get help with this lead. Receive tailored insights, analysis, and strategy recommendations.</div>
-
-    <button class="generate-insights-btn">Generate Insights</div>
-    `;
-    sidebarContainer.appendChild(generateContainer);
-
-    documentation.classList.add("bottom")
-    sidebarContainer.appendChild(documentation);
-  }
-
-}
-else if (history) {
-  const history = document.querySelector(".history");
-  history.id = "selected";
-
-  const optionContainer = document.createElement("div");
-  optionContainer.classList.add("option-container");
-  optionContainer.innerHTML = `
-    <div class="option-btn-container">
-
-      <button class="option-btn all" id="selected">All</button>
-
-      <button class="option-btn leads">Leads</button>
-
-      <button class="option-btn replied">Replied</button>
-
-      <button class="option-btn archived">Archived</button>
-
-
-    </div>
-
-    <button class="option-trash">
-      <img class="trash-icon" alt="trash icon" src="${chrome.runtime.getURL("images/trash-icon.svg")}">
-    </button>
+  <button class="option-trash">
+    <img class="trash-icon" alt="trash icon" src="${chrome.runtime.getURL("images/trash-icon.svg")}">
+  </button>
   `;
-  sidebarContainer.appendChild(optionContainer);
-
-
-
-
-
-
-}
+  historyContainer.appendChild(optionContainer);
+  sidebarContainer.appendChild(historyContainer);
 
 let isOpen = false;
 
