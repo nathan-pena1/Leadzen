@@ -356,5 +356,50 @@
     width: 100%;
     margin-top: 20px;
   }
+
+  .leadzen-sidebar .option-container {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+  }
+
+  .leadzen-sidebar .option-btn-container {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    align-items:center;
+  }
+
+  .leadzen-sidebar .option-btn {
+    border: 1px solid rgb(0, 0, 0);
+    background-color: white;
+    border-radius: 8px;
+    margin: 6px;
+    color: rgb(0, 0, 0);
+  }
+
+  .leadzen-sidebar .option-btn#selected {
+    border: 1px solid #1975f7;
+    border-radius: 8px;
+    margin: 6px;
+    color: #1975f7;
+    background-color: #1976f70c;
+  }
+
+  .leadzen-sidebar .option-trash {
+    margin-left: auto;
+    border: none; 
+    background: none; 
+    padding: 0;
+    margin-right: 14px;
+  }
+
+  .leadzen-sidebar .trash-icon {
+    height: 16px;
+    width: 16px;
+    padding-top: 2px;
+  }
+
+
   
   

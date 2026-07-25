@@ -38,6 +38,7 @@ Other:
 ### This project is in development
 I am currently building out the UI layer, from there I will build out the backend. I will update this section to be a bit more specific in the future.   
 #### See below for what I have so far. 
-![Progress Image (bar)](extension/images/progress-image1.jpeg)
-![Progress Image (sidebar)](extension/images/progress-image2.jpeg)
-![Progress Image (sidebar)](extension/images/progress-image3.jpeg)
+![Progress Image (bar)](demo-imgs/progress-image1.jpeg)
+![Progress Image (sidebar)](demo-imgs/progress-image2.jpeg)
+![Progress Image (insights)](demo-imgs/progress-image3.jpeg)
+![Progress Image (history tab)](demo-imgs/progress-image4.jpeg)
