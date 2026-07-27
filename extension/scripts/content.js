@@ -1,7 +1,7 @@
 function getName(){
   const senderName = document.querySelector("span.gD");
   let name = "Unable to pull name";
-  
+
   if (senderName) {
     const nameId = senderName.getAttribute("name");
 
@@ -30,6 +30,19 @@ function getReceived(){
     received = emailReceived.title.trim();
   }
   return received;
+}
+
+function getEmail() {
+  const emailAddress = document.querySelector("span.gD");
+  let email = "Unable to pull email";
+  if (emailAddress) {
+    emailId = emailAddress.getAttribute("email");
+  }
+  if (emailId) {
+    email = emailId.trim();
+  }
+  
+  return email;
 }
 
 // gmail only for now
@@ -117,7 +130,7 @@ leadContainer.innerHTML = `
 
     <div class="lead-info-container">
       <div class="lead-name"></div>
-      <div class="lead-email">john.doe.realty12@gmail.com</div>
+      <div class="lead-email"></div>
     </div>
 
   </div>
@@ -265,6 +278,9 @@ function openSidebar() {
 
   const receivedText = document.querySelector(".received-text");
   receivedText.textContent = getReceived();
+
+  const senderEmail = document.querySelector(".lead-email");
+  senderEmail.textContent = getEmail();
 
   isOpen = true;
   sidebar.style.display = "block";
