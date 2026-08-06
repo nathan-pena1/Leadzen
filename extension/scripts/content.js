@@ -1,3 +1,39 @@
+function detectRelevance() {
+  const HIGH_CONFIDENCE_WORDS = new Set([
+    "realty", "realtor", "agent", "renters", "tenant", "listing",
+    "apartment", "condo", "duplex", "triplex", "sublease", "escrow", 
+    "appraisal", "foreclosure", "hoa", "mls", "har", "zillow", "redfin" 
+    ]);
+    
+  const MED_CONFIDENCE_WORDS = new Set([
+     "property", "house", "bedroom", "bathroom", "backyard", "sqft", "lead",  "seller",
+     "buyer", "closing", "rental", "rent", "lease", "estate"
+    ]);
+
+  const emailSubject = getSubject().toLowerCase();
+  const emailBody = getBody().toLowerCase();
+  const email = emailSubject + " " + emailBody;
+  let highConfidence = 0;
+  let medConfidence = 0;
+  const emailText =  email.match(/\b[a-z0-9]+\b/g) || [];
+
+
+  for (const word of emailText) {
+    if (HIGH_CONFIDENCE_WORDS.has(word)) {
+      highConfidence += 1
+    }
+    else if (MED_CONFIDENCE_WORDS.has(word)) {
+      medConfidence +=1
+    }
+  }
+
+  if (highConfidence >= 1 || medConfidence >= 2) {
+    return true;
+  }
+  return false;
+
+}
+
 function getName(){
   const senderName = document.querySelector("span.gD");
   let name = "Unable to pull name";
@@ -20,6 +56,7 @@ function getSubject(){
   if (emailSubject) { 
     subject = emailSubject.textContent.trim();
   }
+
   return subject;
 }
 
@@ -29,6 +66,7 @@ function getReceived(){
   if (emailReceived) { 
     received = emailReceived.title.trim();
   }
+
   return received;
 }
 
@@ -41,26 +79,53 @@ function getEmail() {
   if (emailId) {
     email = emailId.trim();
   }
-  
+
   return email;
+}
+
+function getBody() {
+  const emailBody = document.querySelector(".a3s.aiL");
+  let body = "Unable to pull email body";
+  if (emailBody) {
+    body = emailBody.textContent.trim();
+  }
+
+  return body;
 }
 
 // gmail only for now
 const emailDomains = ["mail.google.com", "www.gmail.com"];
 const isEmail = emailDomains.includes(window.location.hostname);
 let bar = null;
-if (isEmail) {
-  bar = document.createElement("div");
-  bar.classList.add("leadzen-bar");
-  bar.innerHTML = `
-  Leadzen<img src="${chrome.runtime.getURL("images/leadzen-icon-128.png")}" id="bar-logo" alt="leadzen logo">
-  
-  `;
+
+function handleBarInjection() {
+  const existingBar = document.querySelector(".leadzen-bar");
+
+  if (isEmail && detectRelevance()) {
+    if (!existingBar) {
+      bar = document.createElement("div");
+      bar.classList.add("leadzen-bar");
+      bar.innerHTML = `
+        Leadzen<img src="${chrome.runtime.getURL("images/leadzen-icon-128.png")}" id="bar-logo" alt="leadzen logo">
+      `;
+      
+      bar.addEventListener("click", function () {
+        openSidebar();
+      });
+
+      document.body.appendChild(bar);
+    }
+  } 
+  else if (existingBar && !isOpen) {
+    existingBar.remove();
+  }
 }
 
-if (isEmail) {
-  document.body.appendChild(bar);
-}
+const observer = new MutationObserver(() => {
+  handleBarInjection();
+});
+observer.observe(document.body, { childList: true, subtree: true });
+
 const sidebar = document.createElement("div");
 sidebar.classList.add("leadzen-sidebar");
 
