@@ -21,10 +21,11 @@ public class EmailController {
     @PostMapping("/insights")
     public InsightsResponse generateInsights(@RequestBody EmailRequest lead) {
         String summary = emailService.getSummary(lead);
-        String urgency = emailService.getUrgency(lead);
+        String urgencyLevel = emailService.getUrgencyLevel(lead);
+        String urgencyDesc= emailService.getUrgencyDesc(lead);
         String suggestedReply = emailService.getReply(lead);
 
-        return new InsightsResponse(summary, urgency, suggestedReply);
+        return new InsightsResponse(summary, urgencyLevel, urgencyDesc, suggestedReply);
     }
 
 }

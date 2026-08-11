@@ -121,6 +121,31 @@ function handleBarInjection() {
   }
 }
 
+function generateInsights() {
+  const LeadEmail = {
+        leadName: getName(),
+        emailDate: getReceived(),
+        emailSubject: getSubject(),
+        emailBody: getBody()
+    };
+
+  chrome.runtime.sendMessage(LeadEmail, function(insights) {
+
+    if (!insights) {
+      console.error("Error gathering insights");
+      return;
+    }
+      summary.textContent = insights.summary;
+      urgencyLevelTitle.textContent = insights.urgencyLevel;
+      urgencyLevel.textContent = insights.urgencyLevel;
+      urgencyDesc.textContent = insights.urgencyDesc;
+      suggestedReply.textContent = insights.suggestedReply
+
+      generateContainer.classList.add("hidden");
+      generatedContainer.classList.remove("hidden");
+    });
+};
+
 const observer = new MutationObserver(() => {
   handleBarInjection();
 });
@@ -260,31 +285,22 @@ generatedContainer.classList.add("hidden");
 const insightContainer = document.createElement("div");
 insightContainer.classList.add("insight-container");
 insightContainer.innerHTML = `
-  <div class="ai-summary">John Doe is inquiring about your listing at 124 Conch Street. He
-    is asking about current interest, and availability for a showing.</div>
+  <div class="ai-summary"></div>
 
   <div class="urgency-title-container">
     <div class="urgency-title">Urgency</div>
-    <div class="urgency-level-title" id="medium">Medium</div>
+    <div class="urgency-level-title" id="medium"></div>
   </div>
 
   <div class="urgency-card">
-    <div class="urgency" id="medium">Medium</div>
-    <div class="urgency-description">Interested buyer asking about a showing.</div>
+    <div class="urgency" id="medium"></div>
+    <div class="urgency-description"></div>
   </div>
 
   <div class="suggested-reply-title">Suggested Reply</div>
 
   <div class="reply-card">
-    <div class="reply-text">Hi John,
-
-Thanks for your interest in 124 Conch Street!
-    
-Yes, the property is still available. I'd be happy to schedule a showing with you. How does this Tuesday at 2 pm look for you?
-    
-Best,
-[Your Name]
-    </div>
+    <div class="reply-text"></div>
 
     <button class="reply-copy-btn">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
@@ -298,11 +314,13 @@ overviewContainer.appendChild(generatedContainer);
 overviewContainer.appendChild(documentation);
 sidebarContainer.appendChild(overviewContainer);
 
+const summary = document.querySelector(".ai-summary");
+const urgencyLevelTitle = document.querySelector(".urgency-level-title");
+const urgencyLevel = document.querySelector(".urgency");
+const urgencyDesc = document.querySelector(".urgency-description");
+const suggestedReply = document.querySelector(".reply-text");
 const genButton = generateContainer.querySelector(".generate-insights-btn");
-genButton.addEventListener("click", () => {
-  generateContainer.classList.add("hidden");
-  generatedContainer.classList.remove("hidden");
-});
+genButton.addEventListener("click", generateInsights);
     
 const historyContainer = document.createElement("div");
 historyContainer.classList.add("hidden");
