@@ -1,5 +1,5 @@
 package com.leadzen.backend.dto;
 
-public record InsightsResponse(String summary, String urgency, String suggestedReply) { 
+public record InsightsResponse(String summary, String urgencyLevel, String urgencyDesc, String suggestedReply) { 
         
 }
