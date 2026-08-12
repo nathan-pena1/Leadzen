@@ -7,9 +7,9 @@
 ---
 <p>[✔︎] Automatic content detection: Extension will pop up only as needed for emails relating to real estate.</p> 
 <p>[✔︎] Display sender and message details.</p> 
-<p>[&ensp;] AI email analysis.</p>
-<p>[&ensp;] Urgency detection. (Is this person serious or just wasting time? Would it be tactical to respond now or later?)</p>
-<p>[&ensp;] Strategic suggested response. (What response is most likely to keep this lead moving through the sales pipeline?)</p>   
+<p>[✔︎] AI email analysis.</p>
+<p>[✔︎] Urgency detection. (Is this person serious or just wasting time? Would it be tactical to respond now or later?)</p>
+<p>[✔︎] Strategic suggested response. (What response is most likely to keep this lead moving through the sales pipeline?)</p>   
 <p>[&ensp;] Lead categories. (New lead, or previous client?)</p> 
 <p>[&ensp;] Lead analysis history.</p> 
 
@@ -38,11 +38,11 @@ Database:
 - PostgreSQL
 
 Other:
-- AI API
+- Gemini API
 
 ### Project Status:
 ---
-The backend API endpoints are now connected to the extension. I am now working on the Leadzen AI insights feature.
+I am currently improving the UI and working on persistent lead history via PostgreSQL.
 
 
 #### See below for what I have so far. 
