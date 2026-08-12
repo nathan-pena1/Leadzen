@@ -19,13 +19,8 @@ public class EmailController {
     }
 
     @PostMapping("/insights")
-    public InsightsResponse generateInsights(@RequestBody EmailRequest lead) {
-        String summary = emailService.getSummary(lead);
-        String urgencyLevel = emailService.getUrgencyLevel(lead);
-        String urgencyDesc= emailService.getUrgencyDesc(lead);
-        String suggestedReply = emailService.getReply(lead);
-
-        return new InsightsResponse(summary, urgencyLevel, urgencyDesc, suggestedReply);
+    public InsightsResponse generate(@RequestBody EmailRequest lead) {
+        return emailService.generateInsights(lead);
     }
 
 }
