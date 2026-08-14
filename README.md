@@ -1,7 +1,7 @@
 # Leadzen
 <p>Leadzen is a Chrome extension I'm building that will help real estate professionals manage, convert, and track leads.</p>
 
-![Progress Image (insights)](demo-imgs/progress-image3.jpeg)  
+![Progress Image (insights)](demo-imgs/progress-image4.jpeg)  
 
 ### Version 1.0 Planned Features (in progress): 
 ---
@@ -48,5 +48,6 @@ I am currently improving the UI and working on persistent lead history via Postg
 #### See below for what I have so far. 
 ![Progress Image (bar)](demo-imgs/progress-image1.jpeg)
 ![Progress Image (sidebar)](demo-imgs/progress-image2.jpeg)
-![Progress Image (insights)](demo-imgs/progress-image3.jpeg)
+![Progress Image (loading)](demo-imgs/progress-image3.jpeg)
+![Progress Image (insights)](demo-imgs/progress-image4.jpeg)
 

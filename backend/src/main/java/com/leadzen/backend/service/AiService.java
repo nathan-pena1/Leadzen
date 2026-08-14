@@ -45,7 +45,7 @@ High
 Medium
 Low
 
-Do not automatically recommend an immediate response. Use delays if necessary for strategy if it would help with leverage or negotiations. Consider whether responding immediately, after a short delay, or later is most likely to help move the lead forward while still providing good service. 
+Do not automatically recommend an immediate response. Use delays if necessary for strategy if it would help with leverage or negotiations. Consider whether responding immediately, after a short delay, or later is most likely to help move the lead forward while still providing good service. Ex: "Respond within 30 minutes for the most strategic play"... (does not have to be exactly like that).
 
 Briefly explain why you recommend that response timing.
 
@@ -62,7 +62,7 @@ The reply should:
 - avoid unnecessary length
 - never invent facts that were not provided
 
-If required information is unknown, write around it instead of making it up.
+If required information is unknown, write around it instead of making it up. Make sure everything returned is natural, grammatically correct, and human like.
 
 Return only valid JSON.
 
