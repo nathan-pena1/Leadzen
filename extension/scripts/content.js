@@ -34,7 +34,7 @@ function detectRelevance() {
 
 }
 
-const mockResponse = true;
+const mockResponse = false;
 
 const mockInsights = {
     summary: "John Doe, an agent from Cool Guys Realty, is inquiring about 124 Conch Street on behalf of a potential client, asking about current offer status and showing availability.",
@@ -380,6 +380,25 @@ const urgencyDesc = document.querySelector(".urgency-description");
 const suggestedReply = document.querySelector(".reply-text");
 const genButton = generateContainer.querySelector(".generate-insights-btn");
 genButton.addEventListener("click", generateInsights);
+const copyButton = document.querySelector(".reply-copy-btn");
+
+copyButton.addEventListener("click", async function() {
+    const text = suggestedReply.textContent;
+    if (!text) {
+        return;
+    }
+    try {
+        await navigator.clipboard.writeText(text);
+        copyButton.classList.add("copied");
+        setTimeout(() => {
+            copyButton.classList.remove("copied");
+        }, 1000);
+
+    } 
+    catch (error) {
+        console.error("Error trying to copy reply", error);
+    }
+});
     
 const historyContainer = document.createElement("div");
 historyContainer.classList.add("hidden");

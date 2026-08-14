@@ -13,8 +13,18 @@
     left: 40px;
     z-index: 999999;
     cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.17);
     font-weight: 600;
+  }
+
+  .leadzen-bar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+  }
+
+  .leadzen-bar:active {
+    transform: translateY(0px) scale(0.98);
   }
 
   .leadzen-sidebar {
@@ -70,6 +80,7 @@
   .leadzen-sidebar .overview,
   .leadzen-sidebar .history{
     color: rgb(92, 92, 92);
+    cursor: pointer;
   }
 
   .leadzen-sidebar .overview-container {
@@ -305,10 +316,62 @@
     white-space: pre-wrap; 
     overflow-wrap: break-word;
   }
+
   .leadzen-sidebar .reply-copy-btn {
     position: absolute;
     bottom: 8px;
     right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: #5f6368;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+  }
+
+  .leadzen-sidebar .reply-copy-btn:hover {
+    background-color: #e8f0fe;
+    color: #1975f7;
+  }
+
+  .leadzen-sidebar .reply-copy-btn:active {
+    transform: scale(0.92);
+  }
+
+  .leadzen-sidebar .reply-copy-btn.copied {
+    background-color: #e6f4ea;
+    color: #188038;
+  }
+  .leadzen-sidebar .generate-insights-btn,
+  .leadzen-sidebar .mark-responded-container,
+  .leadzen-sidebar .add-note-container,
+  .leadzen-sidebar .close-btn,
+  .leadzen-sidebar .option-btn {
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease,
+    transform 0.1s ease, box-shadow 0.15s ease;
+  }
+  .leadzen-sidebar .generate-insights-btn:hover,
+  .leadzen-sidebar .mark-responded-container:hover {
+    background-color: #0f66dc;
+    box-shadow: 0 2px 7px rgba(25, 117, 247, 0.25);
+  }
+  .leadzen-sidebar .generate-insights-btn:active,
+  .leadzen-sidebar .mark-responded-container:active {
+    transform: scale(0.98);
+  }
+
+  .leadzen-sidebar .add-note-container:hover {
+    background-color: #f2f7ff;
+    border-color: #1975f7;
+  }
+  .leadzen-sidebar .add-note-container:active {
+    transform: scale(0.98);
   }
 
   .leadzen-sidebar .documentation{
@@ -395,6 +458,11 @@
     border-radius: 8px;
     margin: 6px;
     color: rgb(0, 0, 0);
+  }
+  .leadzen-sidebar .option-btn:hover {
+    background-color: #f2f7ff;
+    border-color: #1975f7;
+    color: #1975f7;
   }
 
   .leadzen-sidebar .option-btn#selected {
