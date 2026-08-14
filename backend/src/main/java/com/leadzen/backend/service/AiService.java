@@ -2,6 +2,7 @@ package com.leadzen.backend.service;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
+
 import com.leadzen.backend.dto.EmailRequest;
 import com.leadzen.backend.dto.InsightsResponse;
 
@@ -29,8 +30,8 @@ Briefly summarize what the sender wants and any important context. Also assess h
 Determine how strategically important it is to respond quickly. How serious a lead appears may also influence this, i.e. time wasters are given low priority.
 
 Recommend a specific response delay in hours, such as:
-- 0 hours / immediately
-- 0.5 hours
+- immediately
+- 30 minutes
 - 1 hour
 - 2 hours
 - 4 hours
@@ -44,7 +45,7 @@ High
 Medium
 Low
 
-Do not automatically recommend an immediate response. Consider whether responding immediately, after a short delay, or later is most likely to help move the lead forward while still providing good service.
+Do not automatically recommend an immediate response. Use delays if necessary for strategy if it would help with leverage or negotiations. Consider whether responding immediately, after a short delay, or later is most likely to help move the lead forward while still providing good service. 
 
 Briefly explain why you recommend that response timing.
 
@@ -75,6 +76,9 @@ Use exactly this structure:
 }
 
 Do not include markdown, code fences, commentary, or any text outside the JSON object.
+Keep the summary concise, around 25-40 words. Focus only on buyer intent, qualification signals, and the requested next step.
+Keep the urgency explanation concise, around 15-30 words. State the recommended response timing separately from the explanation.
+Suggested replies may be longer, but should generally stay under 120 words unless more detail is clearly necessary.
 """;
         String emailPrompt = """
 Analyze this real estate lead.

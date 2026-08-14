@@ -28,8 +28,9 @@ chrome.runtime.onMessage.addListener(function(LeadEmail, sender, sendResponse) {
       const insights = await response.json();
       sendResponse(insights);
     }
-    catch(error) {
-      console.error("Error gathering insights from Leadzen API", error);
+      catch(error){
+      console.error("Error gathering insights from backend", error);
+      sendResponse({ error: true });
     }
   }
 

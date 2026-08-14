@@ -34,6 +34,46 @@ function detectRelevance() {
 
 }
 
+const mockResponse = true;
+
+const mockInsights = {
+    summary: "John Doe, an agent from Cool Guys Realty, is inquiring about 124 Conch Street on behalf of a potential client, asking about current offer status and showing availability.",
+
+    urgencyLevel: "Medium",
+
+    urgencyDesc: "Recommended response delay: 1 hour. Responding quickly captures broker interest and keeps momentum moving with their potential client without looking overly desperate.",
+
+    suggestedReply: `Hi John,
+    
+Thanks for reaching out about 124 Conch Street! I'd love to get your client scheduled for a showing.
+    
+Are you looking to view it later this week, or is there a specific day that works best for your client? Let me know, and I'll make it happen.
+    
+Best regards,
+[Your Name]`
+};
+function showInsights(insights){
+    summary.textContent = insights.summary;
+    urgencyLevelTitle.textContent = insights.urgencyLevel;
+    urgencyDesc.textContent = insights.urgencyDesc;
+    suggestedReply.textContent = insights.suggestedReply;
+    const urgency = insights.urgencyLevel.toLowerCase();
+    urgencyLevelTitle.id = urgency;
+
+    const subjectVar = getSubject();
+    const receivedVar = getReceived();
+
+    generateContainer.classList.add("hidden");
+    emailContainer.innerHTML = `
+    <div class="collapsed-email">
+      <div class="subject-text">${subjectVar}</div>
+      <div class="received-text">${receivedVar}</div>
+    </div>
+    `;
+    loadingContainer.classList.add("hidden");
+    generatedContainer.classList.remove("hidden");
+}
+
 function getName(){
   const senderName = document.querySelector("span.gD");
   let name = "Unable to pull name";
@@ -73,6 +113,7 @@ function getReceived(){
 function getEmail() {
   const emailAddress = document.querySelector("span.gD");
   let email = "Unable to pull email";
+  let emailId = null;
   if (emailAddress) {
     emailId = emailAddress.getAttribute("email");
   }
@@ -121,30 +162,42 @@ function handleBarInjection() {
   }
 }
 
-function generateInsights() {
-  const LeadEmail = {
+function generateInsights(){
+    const LeadEmail = {
         leadName: getName(),
         emailDate: getReceived(),
         emailSubject: getSubject(),
         emailBody: getBody()
     };
 
-  chrome.runtime.sendMessage(LeadEmail, function(insights) {
+    generateContainer.classList.add("hidden");
+    loadingContainer.classList.remove("hidden");
+    const milliseconds = 3000;
 
-    if (!insights) {
-      console.error("Error gathering insights");
-      return;
+    if (mockResponse){
+        setTimeout(() => {
+            showInsights(mockInsights);
+        }, milliseconds);
+        return;
     }
-      summary.textContent = insights.summary;
-      urgencyLevelTitle.textContent = insights.urgencyLevel;
-      urgencyLevel.textContent = insights.urgencyLevel;
-      urgencyDesc.textContent = insights.urgencyDesc;
-      suggestedReply.textContent = insights.suggestedReply
 
-      generateContainer.classList.add("hidden");
-      generatedContainer.classList.remove("hidden");
+    chrome.runtime.sendMessage(LeadEmail, function(insights){
+
+      if (!insights || insights.error){
+        const loadingText = document.querySelector(".loading-text");
+        loadingText.textContent = "Error gathering insights. Please try again.";
+        setTimeout(() => {
+          loadingContainer.classList.add("hidden");
+          loadingText.textContent = "Analyzing lead...";
+          generateContainer.classList.remove("hidden");
+        }, milliseconds);
+        console.error("Error gathering insights");
+        return;
+      }
+
+      showInsights(insights);
     });
-};
+}
 
 const observer = new MutationObserver(() => {
   handleBarInjection();
@@ -279,6 +332,14 @@ generateContainer.innerHTML = `
 `;
 overviewContainer.appendChild(generateContainer);
 
+const loadingContainer = document.createElement("div");
+loadingContainer.classList.add("loading-container", "hidden");
+loadingContainer.innerHTML = `
+  <div class="loading-graphic"></div>
+  <div class="loading-text">Analyzing lead...</div>
+`;
+overviewContainer.appendChild(loadingContainer);
+
 const generatedContainer = document.createElement("div");
 generatedContainer.classList.add("hidden");
 
@@ -293,7 +354,6 @@ insightContainer.innerHTML = `
   </div>
 
   <div class="urgency-card">
-    <div class="urgency" id="medium"></div>
     <div class="urgency-description"></div>
   </div>
 
@@ -316,7 +376,6 @@ sidebarContainer.appendChild(overviewContainer);
 
 const summary = document.querySelector(".ai-summary");
 const urgencyLevelTitle = document.querySelector(".urgency-level-title");
-const urgencyLevel = document.querySelector(".urgency");
 const urgencyDesc = document.querySelector(".urgency-description");
 const suggestedReply = document.querySelector(".reply-text");
 const genButton = generateContainer.querySelector(".generate-insights-btn");
@@ -348,7 +407,6 @@ optionContainer.innerHTML = `
   sidebarContainer.appendChild(historyContainer);
 
 let isOpen = false;
-
 function openSidebar() {
   if (isOpen) {
     return;
@@ -370,8 +428,8 @@ function openSidebar() {
   if (bar) {
     bar.style.display = "none";
   }
-  document.body.style.marginRight = "340px";
-  document.documentElement.style.marginRight = "340px";
+  document.body.style.marginRight = "430px";
+  document.documentElement.style.marginRight = "430px";
 }
 
 function closeSidebar() {
