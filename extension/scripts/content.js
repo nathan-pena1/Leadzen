@@ -110,6 +110,15 @@ function getReceived(){
   return received;
 }
 
+function getReceivedIso(){
+    const emailReceived = document.querySelector(".g3");
+    const date = new Date(emailReceived.title.trim());
+    if (isNaN(date.getTime())) {
+        return null;
+    }
+    return date.toISOString();
+}
+
 function getEmail() {
   const emailAddress = document.querySelector("span.gD");
   let email = "Unable to pull email";
@@ -132,6 +141,15 @@ function getBody() {
   }
 
   return body;
+}
+function getEmailData() {
+  return {
+    leadName: getName(),
+    emailAddress: getEmail(),
+    emailDate: getReceivedIso(),
+    emailSubject: getSubject(),
+    emailBody: getBody()
+  };
 }
 
 // gmail only for now
@@ -163,12 +181,7 @@ function handleBarInjection() {
 }
 
 function generateInsights(){
-    const LeadEmail = {
-        leadName: getName(),
-        emailDate: getReceived(),
-        emailSubject: getSubject(),
-        emailBody: getBody()
-    };
+    const LeadEmail = getEmailData();
 
     generateContainer.classList.add("hidden");
     loadingContainer.classList.remove("hidden");
@@ -181,9 +194,8 @@ function generateInsights(){
         return;
     }
 
-    chrome.runtime.sendMessage(LeadEmail, function(insights){
-
-      if (!insights || insights.error){
+    chrome.runtime.sendMessage({type: "generate-insights", data: LeadEmail}, function(response){
+      if (!response || response.error){
         const loadingText = document.querySelector(".loading-text");
         loadingText.textContent = "Error gathering insights. Please try again.";
         setTimeout(() => {
@@ -195,8 +207,9 @@ function generateInsights(){
         return;
       }
 
-      showInsights(insights);
+      showInsights(response.insights);
     });
+
 }
 
 const observer = new MutationObserver(() => {
@@ -263,7 +276,7 @@ leadContainer.classList.add("lead-container");
 leadContainer.innerHTML = `
   <div class="lead-overview-container">
     <div class="lead-title">Lead Status</div>
-    <div class="lead-status" id="new-lead">NEW LEAD</div>
+    <div class="lead-status"></div>
   </div>
 
   <div class="lead-info-card">
@@ -426,10 +439,34 @@ optionContainer.innerHTML = `
   sidebarContainer.appendChild(historyContainer);
 
 let isOpen = false;
+let currEmailId = null;
+let currResponded = false;
 function openSidebar() {
   if (isOpen) {
     return;
   }
+  genButton.disabled = true;
+  chrome.runtime.sendMessage({type: "save-email", data: getEmailData()}, function(response) {
+    if (!response || response.error) {
+      console.error("Unable to save email");
+      genButton.disabled = false;
+      return;
+    }
+
+    currEmailId = response.emailId;
+    currResponded = response.responded;
+    genButton.disabled = false;
+    const leadStatus = document.querySelector(".lead-status");
+    if (response.newLead) {
+      leadStatus.textContent = "NEW LEAD";
+      leadStatus.id = "new-lead";
+    }
+    else {
+      leadStatus.textContent = "PREVIOUS CONTACT";
+      leadStatus.id = "previous-lead";
+    }
+  });
+
   const leadName = document.querySelector(".lead-name");
   leadName.textContent = getName();
 

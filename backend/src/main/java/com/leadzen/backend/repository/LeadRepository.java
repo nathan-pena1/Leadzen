@@ -1,5 +1,8 @@
 package com.leadzen.backend.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.leadzen.backend.model.Lead;
+import java.util.Optional;
 
-public interface LeadRepository extends JpaRepository<Lead, Long> {}
+public interface LeadRepository extends JpaRepository<Lead, Long> {
+    Optional<Lead> findByEmailAddress(String emailAddress);
+}

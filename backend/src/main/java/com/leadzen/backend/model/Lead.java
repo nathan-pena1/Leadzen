@@ -13,14 +13,14 @@ public class Lead {
     private Long id;
 
     private String leadName;
-    private String leadEmail;
+    private String emailAddress;
     private String notes;
 
     public Lead() {}
 
-    public Lead(String leadName, String leadEmail, String notes){
+    public Lead(String leadName, String emailAddress, String notes){
         this.leadName = leadName;
-        this.leadEmail = leadEmail;
+        this.emailAddress = emailAddress;
         this.notes = notes;
     }
 
@@ -32,8 +32,8 @@ public class Lead {
         return leadName;
     }
 
-    public String getLeadEmail(){
-        return leadEmail;
+    public String getEmailAddress(){
+        return emailAddress;
     }
 
     public String getNotes(){

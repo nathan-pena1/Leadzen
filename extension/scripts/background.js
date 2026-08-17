@@ -10,32 +10,41 @@ chrome.action.onClicked.addListener(function (tab) {
   });
 });
 
-chrome.runtime.onMessage.addListener(function(LeadEmail, sender, sendResponse) {
-    async function fetchInsights() {
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+  async function sendToBackend() {
     try {
-      const response = await fetch("http://localhost:8080/insights", {
+      let url;
+      if (message.type === "save-email") {
+        url = "http://localhost:8080/email";
+      }
+      else if (message.type === "generate-insights") {
+        url = "http://localhost:8080/insights";
+      }
+      else {
+        return;
+      }
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(LeadEmail)
+        body: JSON.stringify(message.data)
       });
 
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
       }
-    
-      const insights = await response.json();
-      sendResponse(insights);
-    }
-      catch(error){
-      console.error("Error gathering insights from backend", error);
+
+      const result = await response.json();
+      sendResponse(result);
+      }
+    catch (error) {
+      console.error("Backend error", error);
       sendResponse({ error: true });
     }
   }
-
-  fetchInsights();
-
+  
+  sendToBackend();
   return true;
 
 });

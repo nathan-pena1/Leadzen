@@ -10,8 +10,8 @@
 <p>[✔︎] AI email analysis.</p>
 <p>[✔︎] Urgency detection. (Is this person serious or just wasting time? Would it be tactical to respond now or later?)</p>
 <p>[✔︎] Strategic suggested response. (What response is most likely to keep this lead moving through the sales pipeline?)</p>   
-<p>[&ensp;] Lead categories. (New lead, or previous client?)</p> 
-<p>[&ensp;] Lead analysis history.</p> 
+<p>[✔︎] Lead categories. (New lead, or previous client?)</p> 
+<p>[50% complete] (UI needs to be updated.) Lead analysis history.</p> 
 
 
 #### Possible Future Version Additions:  
@@ -38,11 +38,11 @@ Database:
 - PostgreSQL
 
 Other:
-- Gemini API
+- AI API
 
 ### Project Status:
 ---
-I am currently improving the UI and working on persistent lead history via PostgreSQL.
+I am currently updating the UI to reflect the persistent lead history.
 
 
 #### See below for what I have so far. 

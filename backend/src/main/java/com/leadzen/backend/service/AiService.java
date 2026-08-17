@@ -4,7 +4,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
 
 import com.leadzen.backend.dto.EmailRequest;
-import com.leadzen.backend.dto.InsightsResponse;
+import com.leadzen.backend.dto.AiResponse;
 
 @Service
 public class AiService {
@@ -14,7 +14,7 @@ public class AiService {
         this.chatClient = chatClientBuilder.build();
     }
 
-    public InsightsResponse getInsights(EmailRequest lead){
+    public AiResponse getInsights(EmailRequest lead){
 
         String systemPrompt = """
 You are an expert real estate sales assistant helping a real estate professional evaluate and respond to inbound leads.
@@ -94,7 +94,7 @@ Email: %s
                 .system(systemPrompt)
                 .user(emailPrompt)
                 .call()
-                .entity(InsightsResponse.class);
+                .entity(AiResponse.class);
     }
 }
  

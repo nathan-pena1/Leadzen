@@ -175,6 +175,10 @@
     color: rgb(1, 162, 1);
     background-color: rgba(0, 172, 23, 0.374);
   }
+  .leadzen-sidebar #previous-lead {
+    color: rgb(1, 63, 162);
+    background-color: rgba(0, 46, 172, 0.374);
+  }
 
   .leadzen-sidebar .blank-pfp {
     border-radius: 6px;

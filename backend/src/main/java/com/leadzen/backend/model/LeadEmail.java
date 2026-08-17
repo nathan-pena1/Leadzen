@@ -1,12 +1,13 @@
 package com.leadzen.backend.model;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Column;
 
 @Entity
 public class LeadEmail {
@@ -19,27 +20,38 @@ public class LeadEmail {
     @JoinColumn(name = "lead_id")
     private Lead lead;
 
-    private String subject;
+    private String emailSubject;
+
+    @Column(columnDefinition = "TEXT")
     private String summary;
+
     private String urgencyLevel;
+
+    @Column(columnDefinition = "TEXT")
     private String urgencyDesc;
+
+    @Column(columnDefinition = "TEXT")
     private String suggestedReply;
+    
     private boolean responded;
-    private LocalDateTime emailDate;
+    private Instant emailDate;
 
     public LeadEmail() {}
 
-    public LeadEmail(Lead lead, String subject, String summary, String urgencyLevel, String urgencyDesc, String suggestedReply, boolean responded,
-            LocalDateTime emailDate){
+    public LeadEmail(Lead lead, String emailSubject, boolean responded, Instant emailDate){
 
         this.lead = lead;
-        this.subject = subject;
+        this.emailSubject = emailSubject;
+        this.responded = responded;
+        this.emailDate = emailDate;
+    }
+
+    public void setInsights(String summary, String urgencyLevel, String urgencyDesc, String suggestedReply){
+
         this.summary = summary;
         this.urgencyLevel = urgencyLevel;
         this.urgencyDesc = urgencyDesc;
         this.suggestedReply = suggestedReply;
-        this.responded = responded;
-        this.emailDate = emailDate;
     }
 
     public Long getId(){
@@ -51,7 +63,7 @@ public class LeadEmail {
     }
 
     public String getSubject(){
-        return subject;
+        return emailSubject;
     }
 
     public String getSummary(){
@@ -74,7 +86,12 @@ public class LeadEmail {
         return responded;
     }
 
-    public LocalDateTime getEmailDate(){
+    public Instant getEmailDate(){
         return emailDate;
     }
+
+    public void setResponded(boolean responded){
+        this.responded = responded;
+    }
+
 }
