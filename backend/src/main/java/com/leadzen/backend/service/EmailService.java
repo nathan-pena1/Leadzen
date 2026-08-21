@@ -1,7 +1,9 @@
 package com.leadzen.backend.service;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import com.leadzen.backend.model.Lead;
 import com.leadzen.backend.model.LeadEmail;
 import com.leadzen.backend.repository.LeadEmailRepository;
 import com.leadzen.backend.repository.LeadRepository;
+import com.leadzen.backend.dto.HistoryResponse;
 
 @Service
 public class EmailService {
@@ -74,6 +77,21 @@ public class EmailService {
 
         return new InsightsResponse(insights,false, databaseEmail.isResponded());
     }
+
+    public List<HistoryResponse> getHistory() {
+        List<LeadEmail> emails = leadEmailRepository.findAllByOrderByEmailDateDesc();
+        List<HistoryResponse> history = new ArrayList<>();
+
+        for (LeadEmail email : emails) {
+            HistoryResponse response = new HistoryResponse(email.getId(), email.getLead().getLeadName(),
+                                    email.getLead().getEmailAddress(), email.getSubject(), email.getUrgencyLevel(), 
+                                    email.isResponded(), email.getEmailDate());
+
+            history.add(response);
+    }
+
+        return history;
+}
 
 
 
