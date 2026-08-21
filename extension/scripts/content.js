@@ -179,6 +179,16 @@ function handleBarInjection() {
     existingBar.remove();
   }
 }
+function resetInsights() {
+  summary.textContent = "";
+  urgencyLevelTitle.textContent = "";
+  urgencyDesc.textContent = "";
+  suggestedReply.textContent = "";
+
+  generatedContainer.classList.add("hidden");
+  loadingContainer.classList.add("hidden");
+  generateContainer.classList.remove("hidden");
+}
 
 function generateInsights(){
     const LeadEmail = getEmailData();
@@ -445,17 +455,24 @@ function openSidebar() {
   if (isOpen) {
     return;
   }
-  genButton.disabled = true;
+
+  resetInsights();
+  
+  genButton.classList.add("hidden");
   chrome.runtime.sendMessage({type: "save-email", data: getEmailData()}, function(response) {
     if (!response || response.error) {
       console.error("Unable to save email");
-      genButton.disabled = false;
       return;
     }
 
     currEmailId = response.emailId;
     currResponded = response.responded;
-    genButton.disabled = false;
+
+    if (response.prevInsights) {
+      showInsights(response.prevInsights);
+    }
+    genButton.classList.remove("hidden");
+
     const leadStatus = document.querySelector(".lead-status");
     if (response.newLead) {
       leadStatus.textContent = "NEW LEAD";
