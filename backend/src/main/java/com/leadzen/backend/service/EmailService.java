@@ -1,17 +1,18 @@
 package com.leadzen.backend.service;
 
+import java.time.Instant;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
+import com.leadzen.backend.dto.AiResponse;
 import com.leadzen.backend.dto.EmailRequest;
 import com.leadzen.backend.dto.EmailStateResponse;
-import com.leadzen.backend.dto.AiResponse;
 import com.leadzen.backend.dto.InsightsResponse;
 import com.leadzen.backend.model.Lead;
 import com.leadzen.backend.model.LeadEmail;
-import com.leadzen.backend.repository.LeadRepository;
 import com.leadzen.backend.repository.LeadEmailRepository;
-import java.util.Optional;
-import java.time.Instant;
+import com.leadzen.backend.repository.LeadRepository;
 
 @Service
 public class EmailService {
@@ -46,13 +47,19 @@ public class EmailService {
 
         if (previousEmail.isPresent()){
             LeadEmail email = previousEmail.get();
-            return new EmailStateResponse(email.getId(),false, email.isResponded());
+            AiResponse prevInsights = null;
+
+            if (email.getSummary() != null) {
+                prevInsights = new AiResponse(email.getSummary(), email.getUrgencyDesc(), email.getUrgencyLevel(),
+                email.getSuggestedReply());
+            }
+            return new EmailStateResponse(email.getId(),false, email.isResponded(), prevInsights);
         }
 
         LeadEmail email = new LeadEmail(databaseLead, emailRequest.emailSubject(),false, emailDate);
         LeadEmail databaseEmail = leadEmailRepository.save(email);
 
-        return new EmailStateResponse(databaseEmail.getId(), newLead, databaseEmail.isResponded());
+        return new EmailStateResponse(databaseEmail.getId(), newLead, databaseEmail.isResponded(), null);
 
     }
 

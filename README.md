@@ -11,12 +11,11 @@
 <p>[✔︎] Urgency detection. (Is this person serious or just wasting time? Would it be tactical to respond now or later?)</p>
 <p>[✔︎] Strategic suggested response. (What response is most likely to keep this lead moving through the sales pipeline?)</p>   
 <p>[✔︎] Lead categories. (New lead, or previous client?)</p> 
-<p>[50% complete] (UI needs to be updated.) Lead analysis history.</p> 
+<p>[✔︎] Email analysis history. (Remembers and renders previous email analysis if present)</p> 
 
 
 #### Possible Future Version Additions:  
 - More history detail (previous emails, dates, notes)  
-- Pipeline status tracking (new? contacted? showing? closing?)
 
 
 ### About: 
@@ -38,7 +37,7 @@ Database:
 - PostgreSQL
 
 Other:
-- AI API
+- Google Gemini API
 
 ### Project Status:
 ---

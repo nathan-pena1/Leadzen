@@ -38,6 +38,7 @@ Recommend a specific response delay in hours, such as:
 - 8 hours
 - 24 hours
 - 48 hours
+you may also recommend "Do not reply" or something similar if warranted.
 
 3. Urgency Level
 How strategically important it is to respond quickly. Options:
