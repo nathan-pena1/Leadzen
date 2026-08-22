@@ -3,6 +3,8 @@ package com.leadzen.backend.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,6 +37,11 @@ public class EmailController {
     @GetMapping("/history")
     public List<HistoryResponse> getHistory() {
         return emailService.getHistory();
+    }
+
+    @PatchMapping("/email/{id}/responded")
+    public boolean markResponded(@PathVariable Long id) {
+        return emailService.markResponded(id);
     }
 
 }

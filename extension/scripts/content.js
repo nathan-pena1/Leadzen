@@ -250,7 +250,7 @@ function showHistory(emails) {
     historyItem.querySelector(".history-subject").textContent = email.emailSubject;
     let historyUrgency = "Not analyzed";
     if (email.urgencyLevel) {
-      historyUrgency = email.urgencyLevel
+      historyUrgency = email.urgencyLevel;
     }
     historyItem.querySelector(".history-urgency").textContent = historyUrgency;
     historyItem.querySelector(".history-date").textContent =  new Date(email.emailDate).toLocaleString([],
@@ -335,7 +335,6 @@ historyTab.addEventListener("click", () => {
   historyContainer.classList.remove("hidden");
 
   chrome.runtime.sendMessage({ type : "get-history" }, function(response) {
-    console.log("History response:", response);
     showHistory(response);
     }
   );
@@ -462,6 +461,24 @@ const suggestedReply = document.querySelector(".reply-text");
 const genButton = generateContainer.querySelector(".generate-insights-btn");
 genButton.addEventListener("click", generateInsights);
 const copyButton = document.querySelector(".reply-copy-btn");
+const respondedButton = document.querySelector(".mark-responded-container");
+
+respondedButton.addEventListener("click", function() {
+    chrome.runtime.sendMessage({ type: "mark-responded", emailId: currEmailId }, function(response) {
+      if (!response || response.error) {
+        console.error("Error marking responded");
+        return;
+      }
+
+      respondedButton.textContent = "✓ Responded";
+      respondedButton.disabled = true;
+
+      const leadStatus = document.querySelector(".lead-status");
+      leadStatus.textContent = "PREVIOUS CONTACT";
+      leadStatus.id = "previous-lead";
+      }
+    );
+});
 
 copyButton.addEventListener("click", async function() {
     const text = suggestedReply.textContent;
@@ -501,6 +518,7 @@ function openSidebar() {
   resetInsights();
   
   genButton.classList.add("hidden");
+  respondedButton.classList.add("hidden");
   chrome.runtime.sendMessage({type: "save-email", data: getEmailData()}, function(response) {
     if (!response || response.error) {
       console.error("Unable to save email");
@@ -510,19 +528,29 @@ function openSidebar() {
     currEmailId = response.emailId;
     currResponded = response.responded;
 
+    if (currResponded) {
+      respondedButton.textContent = "✓ Responded";
+      respondedButton.disabled = true;
+    }
+    else {
+    respondedButton.textContent = "✓ Mark As Responded";
+    respondedButton.disabled = false;
+    }
+    respondedButton.classList.remove("hidden");
+
     if (response.prevInsights) {
       showInsights(response.prevInsights);
     }
     genButton.classList.remove("hidden");
 
     const leadStatus = document.querySelector(".lead-status");
-    if (response.newLead) {
-      leadStatus.textContent = "NEW LEAD";
-      leadStatus.id = "new-lead";
-    }
-    else {
+    if (response.prevLead) {
       leadStatus.textContent = "PREVIOUS CONTACT";
       leadStatus.id = "previous-lead";
+    }
+    else {
+      leadStatus.textContent = "NEW LEAD";
+      leadStatus.id = "new-lead";
     }
   });
 

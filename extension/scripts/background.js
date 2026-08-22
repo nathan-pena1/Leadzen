@@ -25,6 +25,10 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
         url = "http://localhost:8080/history";
         method = "GET";
       }
+      else if (message.type === "mark-responded") {
+        url = `http://localhost:8080/email/${message.emailId}/responded`;
+        method = "PATCH";
+      }
       else {
         return;
       }
@@ -35,7 +39,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
         }
       };
 
-      if (method !== "GET") {
+      if (method === "POST") {
         request.body = JSON.stringify(message.data);
       }
 

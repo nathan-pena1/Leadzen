@@ -34,17 +34,16 @@ public class EmailService {
         Instant emailDate = Instant.parse(emailRequest.emailDate());
         Optional<Lead> previousLead = leadRepository.findByEmailAddress(emailRequest.emailAddress());
         Lead databaseLead;
-        boolean newLead;
+        boolean prevLead;
 
         if (previousLead.isPresent()){
             databaseLead = previousLead.get();
-            newLead = false;
         }
         else {
             databaseLead = new Lead(emailRequest.leadName(), emailRequest.emailAddress(),"");
             databaseLead = leadRepository.save(databaseLead);
-            newLead = true;
         }
+        prevLead = leadEmailRepository.existsByLeadAndRespondedTrue(databaseLead);
 
         Optional<LeadEmail> previousEmail = leadEmailRepository.findByLeadAndEmailSubjectAndEmailDate(databaseLead, emailRequest.emailSubject(), emailDate);
 
@@ -56,13 +55,13 @@ public class EmailService {
                 prevInsights = new AiResponse(email.getSummary(), email.getUrgencyDesc(), email.getUrgencyLevel(),
                 email.getSuggestedReply());
             }
-            return new EmailStateResponse(email.getId(),false, email.isResponded(), prevInsights);
+            return new EmailStateResponse(email.getId(), prevLead, email.isResponded(), prevInsights);
         }
 
         LeadEmail email = new LeadEmail(databaseLead, emailRequest.emailSubject(),false, emailDate);
         LeadEmail databaseEmail = leadEmailRepository.save(email);
 
-        return new EmailStateResponse(databaseEmail.getId(), newLead, databaseEmail.isResponded(), null);
+        return new EmailStateResponse(databaseEmail.getId(), prevLead, databaseEmail.isResponded(), null);
 
     }
 
@@ -91,8 +90,13 @@ public class EmailService {
     }
 
         return history;
-}
+    }
 
-
+    public boolean markResponded(Long emailId) {
+        LeadEmail email = leadEmailRepository.findById(emailId).orElseThrow();
+        email.setResponded(true);
+        leadEmailRepository.save(email);
+        return true;
+    }
 
 }
