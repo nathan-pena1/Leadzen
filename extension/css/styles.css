@@ -353,7 +353,6 @@
   }
   .leadzen-sidebar .generate-insights-btn,
   .leadzen-sidebar .mark-responded-container,
-  .leadzen-sidebar .add-note-container,
   .leadzen-sidebar .close-btn,
   .leadzen-sidebar .option-btn {
     cursor: pointer;
@@ -367,14 +366,6 @@
   }
   .leadzen-sidebar .generate-insights-btn:active,
   .leadzen-sidebar .mark-responded-container:active {
-    transform: scale(0.98);
-  }
-
-  .leadzen-sidebar .add-note-container:hover {
-    background-color: #f2f7ff;
-    border-color: #1975f7;
-  }
-  .leadzen-sidebar .add-note-container:active {
     transform: scale(0.98);
   }
 
@@ -399,26 +390,6 @@
     margin-bottom: 10px;
     width: 100%;
   }
-
-  .leadzen-sidebar .add-note-container {
-    border: 1px solid rgb(206, 206, 206);
-    border-radius: 8px;
-    color: #1975f7;
-    background-color: white;
-    padding: 12px 0px;
-    font-weight: 500;
-    font-size: 16px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-  }
-  .leadzen-sidebar .note-icon {
-    width: 14px;
-    height: 14px;
-  }
-
 
   .leadzen-sidebar .generate-container {
     padding: 16px;
@@ -545,9 +516,67 @@
     }
 }
 
+.leadzen-sidebar .history-list-container {
+  padding: 12px;
+}
+
+.leadzen-sidebar .history-item {
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 12px;
+  background-color: white;
+}
+
+.leadzen-sidebar .history-section-one,
+.leadzen-sidebar .history-section-two {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.leadzen-sidebar .history-name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.leadzen-sidebar .history-email,
+.leadzen-sidebar .history-date {
+  font-size: 13px;
+  color: rgb(92, 92, 92);
+}
+
+.leadzen-sidebar .history-subject {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  overflow-wrap: break-word;
+}
+
+.leadzen-sidebar .history-urgency {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1975f7;
+  flex-shrink: 0;
+}
+
+.leadzen-sidebar .history-responded {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.leadzen-sidebar .history-responded.responded {
+  color: rgb(0, 179, 0);
+}
+
+.leadzen-sidebar .history-responded.not-responded {
+  color: rgb(255, 0, 0);
+}
+
 .leadzen-sidebar .hidden {
-    display: none !important;
-  }
+  display: none !important;
+}
 
   
   

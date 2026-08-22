@@ -222,6 +222,63 @@ function generateInsights(){
 
 }
 
+function showHistory(emails) {
+  historyListContainer.innerHTML = "";
+
+  emails.forEach(function(email) {
+    const historyItem = document.createElement("div");
+    historyItem.classList.add("history-item");
+    historyItem.innerHTML = `
+      <div class="history-section-one">
+        <div>
+          <div class="history-name"></div>
+          <div class="history-email"></div>
+        </div>
+        <div class="history-urgency"></div>
+      </div>
+
+      <div class="history-subject"></div>
+
+      <div class="history-section-two">
+        <div class="history-date"></div>
+        <div class="history-responded"></div>
+      </div>
+      `;
+
+    historyItem.querySelector(".history-name").textContent = email.leadName;
+    historyItem.querySelector(".history-email").textContent = email.emailAddress;
+    historyItem.querySelector(".history-subject").textContent = email.emailSubject;
+    let historyUrgency = "Not analyzed";
+    if (email.urgencyLevel) {
+      historyUrgency = email.urgencyLevel
+    }
+    historyItem.querySelector(".history-urgency").textContent = historyUrgency;
+    historyItem.querySelector(".history-date").textContent =  new Date(email.emailDate).toLocaleString([],
+    {
+      month: "numeric",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit"
+    }
+    );
+
+    const status = historyItem.querySelector(".history-responded");
+    const urgency = historyItem.querySelector(".history-urgency");
+
+    if (email.responded) {
+      status.textContent = "Responded";
+      status.classList.add("responded");
+    }
+    else {
+      status.textContent = "Not Responded";
+      status.classList.add("not-responded");
+    }
+    historyListContainer.appendChild(historyItem);
+
+  });
+}
+
 const observer = new MutationObserver(() => {
   handleBarInjection();
 });
@@ -276,6 +333,12 @@ historyTab.addEventListener("click", () => {
   historyTab.id = "selected";
   overviewContainer.classList.add("hidden");
   historyContainer.classList.remove("hidden");
+
+  chrome.runtime.sendMessage({ type : "get-history" }, function(response) {
+    console.log("History response:", response);
+    showHistory(response);
+    }
+  );
 });
 
 const overviewContainer = document.createElement("div");
@@ -339,11 +402,6 @@ documentation.classList.add("documentation", "bottom");
 documentation.innerHTML = `
   <button class="mark-responded-container">
     ✓&nbsp;&nbsp;Mark As Responded
-  </button>
-
-  <button class="add-note-container">
-    <img class="note-icon" src="${chrome.runtime.getURL("images/notes.svg")}" alt="note icon">
-    <div class="note-text">Add Note</div>
   </button>
 `;
 
@@ -425,27 +483,11 @@ copyButton.addEventListener("click", async function() {
     
 const historyContainer = document.createElement("div");
 historyContainer.classList.add("hidden");
+  
+  const historyListContainer = document.createElement("div");
+  historyListContainer.classList.add("history-list-container");
+  historyContainer.appendChild(historyListContainer);
 
-const optionContainer = document.createElement("div");
-optionContainer.classList.add("option-container");
-optionContainer.innerHTML = `
-  <div class="option-btn-container">
-
-    <button class="option-btn all" id="selected">All</button>
-
-    <button class="option-btn leads">Leads</button>
-
-    <button class="option-btn replied">Replied</button>
-
-    <button class="option-btn archived">Archived</button>
-
-  </div>
-
-  <button class="option-trash">
-    <img class="trash-icon" alt="trash icon" src="${chrome.runtime.getURL("images/trash-icon.svg")}">
-  </button>
-  `;
-  historyContainer.appendChild(optionContainer);
   sidebarContainer.appendChild(historyContainer);
 
 let isOpen = false;
