@@ -10,4 +10,6 @@ public interface LeadEmailRepository extends JpaRepository<LeadEmail, Long> {
     Optional<LeadEmail> findByLeadAndEmailSubjectAndEmailDate(Lead lead, String emailSubject, Instant emailDate);
 
     List<LeadEmail> findAllByOrderByEmailDateDesc();
+
+    boolean existsByLeadAndRespondedTrue(Lead lead);
 }

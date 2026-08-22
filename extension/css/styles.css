@@ -176,8 +176,8 @@
     background-color: rgba(0, 172, 23, 0.374);
   }
   .leadzen-sidebar #previous-lead {
-    color: rgb(1, 63, 162);
-    background-color: rgba(0, 46, 172, 0.374);
+    color: #1967f7;
+    background-color: #1976f742;
   }
 
   .leadzen-sidebar .blank-pfp {
@@ -286,16 +286,16 @@
 
   .leadzen-sidebar #low {
     color: rgb(0, 123, 255);
-    background-color: rgba(0, 123, 255, 0.374);
+    background-color: rgba(0, 123, 255, 0.22);
   }
 
   .leadzen-sidebar #medium {
-    color: rgb(255, 157, 0);
-    background-color: rgba(255, 191, 0, 0.374);
+    color: rgb(255, 225, 0);
+    background-color: rgba(255, 225, 0, 0.208);
   }
   .leadzen-sidebar #high {
     color: rgb(255, 0, 0);
-    background-color: rgba(255, 0, 0, 0.374);
+    background-color: rgba(255, 0, 0, 0.206);
   }
 
   .leadzen-sidebar .urgency-description {
