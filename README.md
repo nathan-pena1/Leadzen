@@ -12,11 +12,7 @@
 <p>[✔︎] Strategic suggested response. (What response is most likely to keep this lead moving through the sales pipeline?)</p>   
 <p>[✔︎] Lead categories. (New lead, or previous client?)</p> 
 <p>[✔︎] Email analysis history. (Remembers and renders previous email analysis if present)</p> 
-
-
-#### Possible Future Version Additions:  
-- More history detail (previous emails, dates, notes)  
-
+<p>[✔︎] Lead analysis history. 
 
 ### About: 
 ---
@@ -41,7 +37,7 @@ Other:
 
 ### Project Status:
 ---
-I am currently updating the UI to reflect the persistent lead history.
+I am currently updating the UI.
 
 
 #### See below for what I have so far. 

@@ -14,22 +14,32 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   async function sendToBackend() {
     try {
       let url;
+      let method = "POST";
       if (message.type === "save-email") {
         url = "http://localhost:8080/email";
       }
       else if (message.type === "generate-insights") {
         url = "http://localhost:8080/insights";
       }
+      else if (message.type === "get-history") {
+        url = "http://localhost:8080/history";
+        method = "GET";
+      }
       else {
         return;
       }
-      const response = await fetch(url, {
-        method: "POST",
+      const request = {
+        method: method,
         headers: {
           "Content-Type": "application/json",
-        },
-        body: JSON.stringify(message.data)
-      });
+        }
+      };
+
+      if (method !== "GET") {
+        request.body = JSON.stringify(message.data);
+      }
+
+      const response = await fetch(url, request);
 
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
@@ -37,7 +47,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 
       const result = await response.json();
       sendResponse(result);
-      }
+    }
     catch (error) {
       console.error("Backend error", error);
       sendResponse({ error: true });
